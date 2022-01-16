@@ -4,6 +4,10 @@
 
 use python as exercise programming language.
 
+## Progress
+
+68/855
+
 ## Constructs
 
 exercise regex name like E\d+_{filename}.
