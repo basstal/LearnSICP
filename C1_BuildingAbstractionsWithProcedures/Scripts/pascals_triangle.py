@@ -1,6 +1,9 @@
+"""
+reference from https://codereview.stackexchange.com/questions/96211/pascals-triangle-recursion/96213
+"""
+
 def pascal(row, column):
     """
-    https://codereview.stackexchange.com/questions/96211/pascals-triangle-recursion/96213
     >>> pascal(0, 0)
     1
     >>> pascal(5, 4)

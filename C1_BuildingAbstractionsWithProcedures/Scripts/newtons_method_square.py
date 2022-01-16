@@ -1,5 +1,8 @@
 import sys
 """
+because python have recursion limit default to 100.
+this will cause a procedural process fail.
+change its limit to 10000 to prevent this failure.
 因为递归数量超出 100 的限制，这里抬高这个限制
 """
 sys.setrecursionlimit(10000)
@@ -31,6 +34,7 @@ def sqrt(x):
 
 
 """
+use new_if to replace the if in process sqrt_iter.
 尝试用 new_if 替代 sqrt_iter 的 if
 """
 
@@ -42,6 +46,7 @@ def new_if(predicate, the_clause, else_clause):
 
 def sqrt_iter2(guess, x):
     """
+    due to applicative-order evaluation problem, can't end the recursion even if process good_enough have returned true。
     因为 applicative-order 求值的问题导致这里无法在 good_enough 得到 true 后结束递归。
     """
     return new_if(good_enough(guess, x), guess, sqrt_iter2(improve(guess, x), x))
