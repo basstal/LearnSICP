@@ -8,7 +8,7 @@ python as exercise programming language.
 
 ## Progress
 
-88/855
+96/855
 
 ## Constructs
 
