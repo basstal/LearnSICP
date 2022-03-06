@@ -1,8 +1,44 @@
+- [Exercise 2.1](#exercise-21)
+  - [Answer 2.1](#answer-21)
+- [Exercise 2.2](#exercise-22)
+  - [Answer 2.2](#answer-22)
+- [Exercise 2.3](#exercise-23)
+- [Exercise 2.4](#exercise-24)
+  - [Answer 2.4](#answer-24)
+- [Exercise 2.5](#exercise-25)
+  - [Answer 2.5](#answer-25)
+- [Exercise 2.6](#exercise-26)
+- [Exercise 2.7](#exercise-27)
+  - [Answer 2.7](#answer-27)
+- [Exercise 2.8](#exercise-28)
+  - [Answer 2.8](#answer-28)
+- [Exercise 2.9](#exercise-29)
+  - [Answer 2.9](#answer-29)
+- [Exercise 2.10](#exercise-210)
+  - [Answer 2.10](#answer-210)
+- [Exercise 2.11](#exercise-211)
+- [Exercise 2.12](#exercise-212)
+  - [Answer 2.12](#answer-212)
+- [Exercise 2.13](#exercise-213)
+- [Exercise 2.14](#exercise-214)
+  - [Answer 2.14](#answer-214)
+- [Exercise 2.15](#exercise-215)
+- [Exercise 2.16](#exercise-216)
+- [Exercise 2.17](#exercise-217)
+  - [Answer 2.17](#answer-217)
+- [Exercise 2.18](#exercise-218)
+  - [Answer 2.18](#answer-218)
+- [Exercise 2.19](#exercise-219)
+- [Exercise 2.20](#exercise-220)
+  - [Answer 2.20](#answer-220)
+- [Exercise 2.21](#exercise-221)
+  - [Answer 2.21](#answer-221)
+
 # Exercise 2.1
 
 Define a better version of make-rat that handles both positive and negative arguments. make-rat should normalize the sign so that if the rational number is positive, both the numerator and denominator are positive, and if the rational number is negative, only the numerator is negative.
 
-# Answer 2.1
+## Answer 2.1
 
 [Scripts/make_rat.py](Scripts/make_rat.py)
 
@@ -20,7 +56,7 @@ Consider the problem of representing line segments in a plane. Each segment is r
     (display ")"))
 ```
 
-# Answer 2.2
+## Answer 2.2
 
 [Scripts/line_segments.py](Scripts/line_segments.py)
 
@@ -42,7 +78,7 @@ Here is an alternative procedural representation of pairs. For this representati
 
 What is the corresponding definition of cdr? (Hint: To verify that this works, make use of the substitution model of Section 1.1.5.)
 
-# Answer 2.4
+## Answer 2.4
 
 ```python
 def cons(x, y):
@@ -55,7 +91,7 @@ def cdr(z):
 
 Show that we can represent pairs of nonnegative integers using only numbers and arithmetic operations if we represent the pair a and b as the integer that is the product $2^a3^b$. Give the corresponding definitions of the procedures cons, car, and cdr.
 
-# Answer 2.5
+## Answer 2.5
 
 ```python
 def cons(a, b):
@@ -101,7 +137,7 @@ Alyssa’s program is incomplete because she has not specified the implementatio
 
 Define selectors upper-bound and lower-bound to complete the implementation.
 
-# Answer 2.7
+## Answer 2.7
 
 [Scripts/interval_bounds.py](Scripts/interval_bounds.py)
 
@@ -109,7 +145,7 @@ Define selectors upper-bound and lower-bound to complete the implementation.
 
 Using reasoning analogous to Alyssa’s, describe how the difference of two intervals may be computed. Define a corresponding subtraction procedure, called sub-interval.
 
-# Answer 2.8
+## Answer 2.8
 
 [Scripts/interval_sub.py](Scripts/interval_sub.py)
 
@@ -118,7 +154,7 @@ Using reasoning analogous to Alyssa’s, describe how the difference of two inte
 
 The width of an interval is half of the difference between its upper and lower bounds. The width is a measure of the uncertainty of the number specified by the interval. For some arithmetic operations the width of the result of combining two intervals is a function only of the widths of the argument intervals, whereas for others the width of the combination is not a function of the widths of the argument intervals. Show that the width of the sum (or difference) of two intervals is a function only of the widths of the intervals being added (or subtracted). Give examples to show that this is not true for multiplication or division.
 
-# Answer 2.9
+## Answer 2.9
 
 [Scripts/interval_width.py](Scripts/interval_width.py)
 
@@ -126,7 +162,7 @@ The width of an interval is half of the difference between its upper and lower b
 
 Ben Bitdiddle, an expert systems programmer, looks over Alyssa’s shoulder and comments that it is not clear what it means to divide by an interval that spans zero. Modify Alyssa’s code to check for this condition and to signal an error if it occurs.
 
-# Answer 2.10
+## Answer 2.10
 
 [Scripts/interval_divide_fix.py](Scripts/interval_divide_fix.py)
 
@@ -151,7 +187,7 @@ Unfortunately, most of Alyssa’s users are engineers. Real engineering situatio
 
 Define a constructor make-center-percent that takes a center and a percentage tolerance and produces the desired interval. You must also define a selector percent that produces the percentage tolerance for a given interval. The center selector is the same as the one shown above.
 
-# Answer 2.12
+## Answer 2.12
 
 [Scripts/make_center_percent.py](Scripts/make_center_percent.py)
 
@@ -190,7 +226,7 @@ Lem complains that Alyssa’s program gives different answers for the two ways o
 
 Demonstrate that Lem is right. Investigate the behavior of the system on a variety of arithmetic expressions. Make some intervals A and B, and use them in computing the expressions A/A and A/B. You will get the most insight by using intervals whose width is a small percentage of the center value. Examine the results of the computation in center-percent form (see Exercise 2.12).
 
-# Answer 2.14
+## Answer 2.14
 
 [Scripts/interval_parallel_formula.py](Scripts/interval_parallel_formula.py)
 
@@ -212,7 +248,7 @@ Define a procedure last-pair that returns the list that contains only the last e
 (34)
 ```
 
-# Answer 2.17
+## Answer 2.17
 
 [Scripts/last_pair.py](Scripts/last_pair.py)
 
@@ -225,7 +261,7 @@ Define a procedure reverse that takes a list as argument and returns a list of t
 (25 16 9 4 1)
 ```
 
-# Answer 2.18
+## Answer 2.18
 
 [Scripts/reverse.py](Scripts/reverse.py)
 
@@ -265,3 +301,75 @@ To do this will require changing the program cc somewhat. It will still have the
 ```
 
 Define the procedures first-denomination, except-first-denomination, and no-more? in terms of primitive operations on list structures. Does the order of the list coin-values affect the answer produced by cc? Why or why not?
+
+# Exercise 2.20
+
+The procedures +, *, and list take arbitrary numbers of arguments. One way to define such procedures is to use define with dotted-tail notation. In a procedure definition, a parameter list that has a dot before the last parameter name indicates that, when the procedure is called, the initial parameters (if any) will have as values the initial arguments, as usual, but the final parameter’s value will be a list of any remaining arguments. For instance, given the definition
+
+```scheme
+(define (f x y . z) ⟨body⟩)
+```
+
+the procedure f can be called with two or more arguments. If we evaluate
+
+```scheme
+(f 1 2 3 4 5 6)
+```
+
+then in the body of f, x will be 1, y will be 2, and z will be the list (3 4 5 6). Given the definition
+
+```scheme
+(define (g . w) ⟨body⟩)
+```
+
+the procedure g can be called with zero or more arguments. If we evaluate
+
+```scheme
+(g 1 2 3 4 5 6)
+```
+
+then in the body of g, w will be the list (1 2 3 4 5 6).
+
+Use this notation to write a procedure same-parity that takes one or more integers and returns a list of all the arguments that have the same even-odd parity as the first argument. For example,
+
+```scheme
+(same-parity 1 2 3 4 5 6 7)
+(1 3 5 7)
+(same-parity 2 3 4 5 6 7)
+(2 4 6)
+```
+
+## Answer 2.20
+
+[Scripts/same_parity.py](Scripts/same_parity.py)
+
+# Exercise 2.21
+
+The procedure square-list takes a list of numbers as argument and returns a list of the squares of those numbers.
+
+```scheme
+(square-list (list 1 2 3 4))
+(1 4 9 16)
+```
+
+Here are two different definitions of square-list. Complete both of them by filling in the missing expressions:
+
+```scheme
+(define (square-list items)
+    (if (null? items)
+        nil
+        (cons ⟨??⟩ ⟨??⟩)))
+(define (square-list items)
+    (map ⟨??⟩ ⟨??⟩))
+```
+
+## Answer 2.21
+
+```scheme
+(define (square-list items)
+    (if (null? items)
+        nil
+        (cons ⟨??⟩ ⟨??⟩)))
+(define (square-list items)
+    (map ⟨??⟩ ⟨??⟩))
+```

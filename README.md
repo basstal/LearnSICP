@@ -1,23 +1,30 @@
+- [LearnSICP](#learnsicp)
+  - [Contents](#contents)
+    - [Summary](#summary)
+    - [Exercise](#exercise)
+  - [Notes](#notes)
+  - [Progress](#progress)
+
 # LearnSICP
 
-This repo contains summary and exercise on reading Structure and Interpretation of Computer Programs(SICP) second edition.
+This repository contains exercise and summary on reading Structure and Interpretation of Computer Programs(SICP)(second edition).
+
+## Contents
+
+### Summary
+
+- [Chapter1 BuildingAbstractionsWithProcedures](./C1_BuildingAbstractionsWithProcedures/Summary.md)
+
+
+### Exercise
+
+- [Chapter1 BuildingAbstractionsWithProcedures](./C1_BuildingAbstractionsWithProcedures/Exercise.md)
+- [Chapter2 BuildingAbstractionsWithData](./C2_BuildingAbstractionsWithData/Exercise.md)
 
 ## Notes
 
-python as exercise programming language.
+- python as exercise programming language.
 
 ## Progress
 
-141/855
-
-## Constructs
-
-exercise be regex name like E\d+_{filename}.
-
-Summary.md contains my summarizing.
-
-Scripts folder contains all codes.
-
-ExernalResource folder contains reference or resource from other people.
-
-Resource folder contains all assets.
+145/855

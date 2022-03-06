@@ -1,16 +1,95 @@
+- [Exercise 1.1](#exercise-11)
+- [Exercise 1.2](#exercise-12)
+- [Exercise 1.3](#exercise-13)
+  - [Answer 1.3](#answer-13)
+- [Exercise 1.4](#exercise-14)
+- [Exercise 1.5](#exercise-15)
+  - [Answer 1.5](#answer-15)
+- [Exercise 1.6](#exercise-16)
+  - [Answer 1.6](#answer-16)
+- [Exercise 1.7](#exercise-17)
+  - [Answer 1.7](#answer-17)
+- [Exercise 1.8](#exercise-18)
+  - [Answer 1.8](#answer-18)
+- [Exercise 1.9](#exercise-19)
+- [Exercise 1.10](#exercise-110)
+  - [Answer 1.10](#answer-110)
+- [Exercise 1.11](#exercise-111)
+  - [Answer 1.11](#answer-111)
+- [Exercise 1.12](#exercise-112)
+  - [Answer 1.12](#answer-112)
+- [Exercise 1.13](#exercise-113)
+- [Exercise 1.14](#exercise-114)
+  - [Answer 1.14](#answer-114)
+- [Exercise 1.15](#exercise-115)
+  - [Answer 1.15](#answer-115)
+- [Exercise 1.16](#exercise-116)
+  - [Answer 1.16](#answer-116)
+- [Exercise 1.17](#exercise-117)
+  - [Answer 1.17](#answer-117)
+- [Exercise 1.18](#exercise-118)
+  - [Answer 1.18](#answer-118)
+- [Exercise 1.19](#exercise-119)
+- [Exercise 1.20](#exercise-120)
+  - [Answer 1.20](#answer-120)
+- [Exercise 1.21](#exercise-121)
+  - [Answer 1.21](#answer-121)
+- [Exercise 1.22](#exercise-122)
+  - [Answer 1.22](#answer-122)
+- [Exercise 1.23](#exercise-123)
+  - [Answer 1.23](#answer-123)
+- [Exercise 1.24](#exercise-124)
+- [Exercise 1.25](#exercise-125)
+- [Exercise 1.26](#exercise-126)
+- [Exercise 1.27](#exercise-127)
+- [Exercise 1.28](#exercise-128)
+- [Exercise 1.29](#exercise-129)
+  - [Answer 1.29](#answer-129)
+- [Exercise 1.30](#exercise-130)
+  - [Answer 1.30](#answer-130)
+- [Exercise 1.31](#exercise-131)
+  - [Answer 1.31](#answer-131)
+- [Exercise 1.32](#exercise-132)
+  - [Answer 1.32](#answer-132)
+- [Exercise 1.33](#exercise-133)
+  - [Answer 1.33](#answer-133)
+- [Exercise 1.34](#exercise-134)
+  - [Answer 1.34](#answer-134)
+- [Exercise 1.35](#exercise-135)
+  - [Answer 1.35](#answer-135)
+- [Exercise 1.36](#exercise-136)
+  - [Answer 1.36](#answer-136)
+- [Exercise 1.37](#exercise-137)
+  - [Answer 1.37](#answer-137)
+- [Exercise 1.38](#exercise-138)
+  - [Answer 1.38](#answer-138)
+- [Exercise 1.39](#exercise-139)
+  - [Answer 1.39](#answer-139)
+- [Exercise 1.40](#exercise-140)
+  - [Answer 1.40](#answer-140)
+- [Exercise 1.41](#exercise-141)
+  - [Answer 1.41](#answer-141)
+- [Exercise 1.42](#exercise-142)
+  - [Answer 1.42](#answer-142)
+- [Exercise 1.43](#exercise-143)
+  - [Answer 1.43](#answer-143)
+- [Exercise 1.44](#exercise-144)
+  - [Answer 1.44](#answer-144)
+- [Exercise 1.45](#exercise-145)
+- [Exercise 1.46](#exercise-146)
 # Exercise 1.1
 
 Below is a sequence of expressions. What is the result printed by the interpreter in response to each expression?Assume that the sequence is to be evaluated in the order in which it is presented.
 
 # Exercise 1.2
 
-Translate the following expression into preﬁx form:
+Translate the following expression into prefix form:
 
 # Exercise 1.3
 
 Define a procedure that takes three numbers as arguments and returns the sum of the squares of the two larger numbers.
 
-# Answer 1.3
+## Answer 1.3
 ```python
 def sum_squares_larger(a, b, c):
     if a < b and a < c:
@@ -41,7 +120,7 @@ Then he evaluates the expression
 
 What behavior will Ben observe with an interpreter that uses applicative-order evaluation? What behavior will he observe with an interpreter that uses normal-order evaluation? Explain your answer. (Assume that the evaluation rule for the special form if is the same whether the interpreter is using normal or applicative order: The predicate expression is evaluated ﬁrst, and the result determines whether to evaluate the consequent or the alternative expression.)
 
-# Answer 1.5
+## Answer 1.5
 
 ```python
 def p(p):
@@ -88,7 +167,7 @@ Delighted, Alyssa uses new-if to rewrite the square-root program:
 
 What happens when Alyssa attempts to use this to compute square roots? Explain.
 
-# Answer 1.6
+## Answer 1.6
 
 [Scripts/newtons_method_square.py](Scripts/newtons_method_square.py)
 
@@ -96,7 +175,7 @@ What happens when Alyssa attempts to use this to compute square roots? Explain.
 
 The good-enough? test used in computing square roots will not be very eﬀective for ﬁnding the square roots of very small numbers. Also, in real computers, arith-metic operations are almost always performed with lim-ited precision. This makes our test inadequate for very large numbers. Explain these statements, with examples showing how the test fails for small and large numbers. An alterna-tive strategy for implementing good-enough? is to watch how guess changes from one iteration to the next and to stop when the change is a very small fraction of the guess. Design a square-root procedure that uses this kind of end test. Does this work better for small and large numbers?
 
-# Answer 1.7
+## Answer 1.7
 
 [Scripts/newtons_method_square.py](Scripts/newtons_method_square.py)
 
@@ -109,7 +188,7 @@ $$\frac{{x}/{y}^2 + 2y}{3}$$
 Use this formula to implement a cube-root procedure analogous to the square-root procedure. (In Section 1.3.4 we will see how to implement Newton’s method in general as an abstraction of these square-root and cube-root procedures.)
 
 
-# Answer 1.8
+## Answer 1.8
 
 [Scripts/cube_root.py](Scripts/cube_root.py)
 
@@ -158,7 +237,7 @@ Consider the following procedures, where A is the procedure defined above:
 
 Give concise mathematical definitions for the functions computed by the procedures f, g, and h for positive integer values of n. For example, (k n) computes 5n2.
 
-# Answer 1.10
+## Answer 1.10
 
 [Scripts/ackermann_func.py](Scripts/ackermann_func.py)
 
@@ -173,7 +252,7 @@ f(n-1)+2f(n-2)+3f(n-3) & \text{if} & n\geq{3}
 
 Write a procedure that computes f by means of a recursive process. Write a procedure that computes f by means of an iterative process.
 
-# Answer 1.11
+## Answer 1.11
 
 [Scripts/func_f.py](Scripts/func_f.py)
 
@@ -193,7 +272,7 @@ The following pattern of numbers is called Pascal’s triangle.
 
 The numbers at the edge of the triangle are all 1, and each number inside the triangle is the sum of the two numbers above it. Write a procedure that computes elements of Pascal’s triangle by means of a recursive process.
 
-# Answer 1.12
+## Answer 1.12
 
 [Scripts/pascals_triangle.py](Scripts/pascals_triangle.py)
 
@@ -206,7 +285,7 @@ Prove that Fib(n) is the closest integer to $ϕ^n /\sqrt{5}$, where $ϕ = (1 + \
 
 Draw the tree illustrating the process generated by the count-change procedure of Section 1.2.2 in making change for 11 cents. What are the orders of growth of the space and number of steps used by this process as the amount to be changed increases?
 
-# Answer 1.14
+## Answer 1.14
 
 space $\theta{(1)}$ number of steps $\theta{(5^n)}$$
 
@@ -231,7 +310,7 @@ a.	How many times is the procedure p applied when (sine 12.15) is evaluated?
 
 b.	What is the order of growth in space and number of steps (as a function of a) used by the process generated by the sine procedure when (sine a) is evaluated?
 
-# Answer 1.15
+## Answer 1.15
 
 a. 2 times
 
@@ -241,7 +320,7 @@ b. space $\theta{(\log_3{n})}$ number of steps $\theta{(\log_3{n})}$
 
 Design a procedure that evolves an iterative exponentiation process that uses successive squaring and uses a logarithmic number of steps, as does fast-expt.(Hint: Using the observation that $(b^{n/2})^2 = (b^2)^{n/2}$, keep, along with the exponent n and the base b, an additional state variable a, and define the state transformation in such a way that the product $ab^n$ is unchanged from state to state. At the beginning of the process a is taken to be 1, and the answer is given by the value of a at the end of the process. In general, the technique of defining an invariant quantity that remains unchanged from state to state is a powerful way to think about the design of iterative algorithms.)
 
-# Answer 1.16
+## Answer 1.16
 
 [Scripts/exp_iterative.py](Scripts/exp_iterative.py)
 
@@ -259,7 +338,7 @@ The exponentiation algorithms in this section are based on performing exponentia
 This algorithm takes a number of steps that is linear in b. Now suppose we include, together with addition, operations double, which doubles an integer, and halve, which divides an (even) integer by 2. Using these, design a multiplication procedure analogous to fast-expt that uses a logarithmic number of steps.
 
 
-# Answer 1.17
+## Answer 1.17
 
 [Scripts/mul.py](Scripts/mul.py)
 
@@ -267,7 +346,7 @@ This algorithm takes a number of steps that is linear in b. Now suppose we inclu
 
 Using the results of Exercise 1.16 and Exercise 1.17, devise a procedure that generates an iterative process for multiplying two integers in terms of adding, doubling, and halving and uses a logarithmic number of steps.
 
-# Answer 1.18
+## Answer 1.18
 
 [Scripts/mul_iterative.py](Scripts/mul_iterative.py)
 
@@ -299,7 +378,7 @@ There is a clever algorithm for computing the Fibonacci numbers in a logarithmic
 
 The process that a procedure generates is of course dependent on the rules used by the interpreter. As an example, consider the iterative gcd procedure given above. Suppose we were to interpret this procedure using normal-order evaluation, as discussed in Section 1.1.5. (The normal-order-evaluation rule for if is described in Exercise 1.5.) Using the substitution method (for normal order), illus-trate the process generated in evaluating (gcd 206 40) and indicate the remainder operations that are actually per-formed. How many remainder operations are actually per-formed in the normal-order evaluation of (gcd 206 40)?In the applicative-order evaluation?
 
-# Answer 1.20
+## Answer 1.20
 
 4 times in normal-order evaluation, 4 times in applicative-order evaluation.
 
@@ -307,7 +386,7 @@ The process that a procedure generates is of course dependent on the rules used 
 
 Use the smallest-divisor procedure to ﬁnd the smallest divisor of each of the following numbers: 199, 1999, 19999.
 
-# Answer 1.21
+## Answer 1.21
 
 [Scripts/smallest_divisor.py](Scripts/smallest_divisor.py)
 
@@ -331,7 +410,7 @@ Most Lisp implementations include a primitive called runtime that returns an int
 
 Using this procedure, write a procedure search-for-primes that checks the primality of consecutive odd integers in a specified range. Use your procedure to find the three smallest primes larger than 1000; larger than 10,000; larger than 100,000; larger than 1,000,000. Note the time needed to test each prime. Since the testing algorithm has order of growth of $\Theta({\sqrt{n}})$, you should expect that testing for primes around 10,000 should take about $\sqrt{10}$ times as long as testing for primes around 1000. Do your timing data bear this out? How well do the data for 100,000 and 1,000,000 support the $\Theta({\sqrt{n}})$ prediction? Is your result compatible with the notion that programs on your machine run in time proportional to the number of steps required for the computation?
 
-# Answer 1.22
+## Answer 1.22
 
 [Scripts/search_for_primes.py](Scripts/search_for_primes.py)
 
@@ -340,7 +419,7 @@ Using this procedure, write a procedure search-for-primes that checks the primal
 The smallest-divisor procedure shown at the start of this section does lots of needless testing: After it checks to see if the number is divisible by 2 there is no point in checking to see if it is divisible by any larger even numbers. This suggests that the values used for test-divisor should not be 2, 3, 4, 5, 6, . . ., but rather 2, 3, 5, 7, 9, . . .. To implement this change, define a procedure next that returns 3 if its input is equal to 2 and otherwise returns its input plus 2. Modify the smallest-divisor procedure to use (next test-divisor) instead of (+ test-divisor 1). With timed-prime-test incorporating this modified version of smallest-divisor, run the test for each of the 12 primes found in Exercise 1.22. Since this modification halves the number of test steps, you should expect it to run about twice as fast. Is this expectation confirmed? If not, what is the observed ratio of the speeds of the two algorithms, and how do you explain the fact that it is different from 2?
 
 
-# Answer 1.23
+## Answer 1.23
 
 [Scripts/smallest_divisor.py](Scripts/smallest_divisor.py)
 
@@ -397,7 +476,7 @@ $$\frac{h}{3}(y_0+4y_1+2y_2+4y_3+2y_4+ ... + 2y_{n-2}+4y_{n-1}+y_n)$$
 
 where h = (b − a)/n, for some even integer n, and $y_k = f (a + kh)$. (Increasing n increases the accuracy of the approximation.) Define a procedure that takes as arguments f , a, b, and n and returns the value of the integral, computed using Simpson’s Rule. Use your procedure to integrate cube between 0 and 1 (with n = 100 and n = 1000), and compare the results to those of the integral procedure shown above.
 
-# Answer 1.29
+## Answer 1.29
 
 [Scripts/simpson_rule.py](Scripts/simpson_rule.py)
 
@@ -414,7 +493,7 @@ The sum procedure above generates a linear recursion. The procedure can be rewri
 (iter ⟨??⟩ ⟨??⟩))
 ```
 
-# Answer 1.30
+## Answer 1.30
 
 ```scheme
 (define (sum term a next b)
@@ -433,7 +512,7 @@ $$\frac{\pi}{4} = \frac{2 * 4 *4 * 6 * 6 * 8...}{3 * 3 * 5 * 5 * 7 * 7...}$$
 
 b. If your product procedure generates a recursive process, write one that generates an iterative process. If it generates an iterative process, write one that generates a recursive process.
 
-# Answer 1.31
+## Answer 1.31
 
 ab. [Scripts/product.py](Scripts/product.py)
 
@@ -450,7 +529,7 @@ accumulate takes as arguments the same term and range specifications as sum and 
 
 b. If your accumulate procedure generates a recursive process, write one that generates an iterative process. If it generates an iterative process, write one that generates a recursive process.
 
-# Answer 1.32
+## Answer 1.32
 
 ab. [Scripts/accumulate.py](Scripts/accumulate.py)
 
@@ -462,7 +541,7 @@ a.	the sum of the squares of the prime numbers in the interval a to b (assuming 
 
 b.	the product of all the positive integers less than n that are relatively prime to n (i.e., all positive integers i < n such that GCD(i, n) = 1).
 
-# Answer 1.33
+## Answer 1.33
 
 [Scripts/filtered_accumulate.py](Scripts/filtered_accumulate.py)
 
@@ -485,7 +564,7 @@ Then we have
 
 What happens if we (perversely) ask the interpreter to evaluate the combination (f f)? Explain.
 
-# Answer 1.34
+## Answer 1.34
 
 expression will represent like (2 2) which make no sense.
 
@@ -493,7 +572,7 @@ expression will represent like (2 2) which make no sense.
 
 Show that the golden ratio ϕ (Section 1.2.2) is a fixed point of the transformation $x \to{ 1 + 1/x}$, and use this fact to compute ϕ by means of the fixed-point procedure.
 
-# Answer 1.35
+## Answer 1.35
 
 [Scripts/golden_ratio.py](Scripts/golden_ratio.py)
 
@@ -501,7 +580,7 @@ Show that the golden ratio ϕ (Section 1.2.2) is a fixed point of the transforma
 
 Modify fixed-point so that it prints the sequence of approximations it generates, using the newline and display primitives shown in Exercise 1.22. Then find a solution to xx = 1000 by finding a fixed point of $x \to log(1000)/ log(x)$. (Use Scheme’s primitive log procedure, which computes natural logarithms.) Compare the number of steps this takes with and without average damping. (Note that you cannot start fixed-point with a guess of 1, as this would cause division by log(1) = 0.)
 
-# Answer 1.36
+## Answer 1.36
 
 [Scripts/fixed_point_average_damping.py](Scripts/fixed_point_average_damping.py)
 
@@ -526,7 +605,7 @@ for successive values of k. How large must you make k in order to get an approxi
 
 b. If your cont-frac procedure generates a recursive process, write one that generates an iterative process. If it generates an iterative process, write one that generates a recursive process.
 
-# Answer 1.37
+## Answer 1.37
 
 [Scripts/cont_frac_expression.py](Scripts/cont_frac_expression.py)
 
@@ -534,7 +613,7 @@ b. If your cont-frac procedure generates a recursive process, write one that gen
 
 In 1737, the Swiss mathematician Leonhard Euler published a memoir De Fractionibus Continuis, which included a continued fraction expansion for e − 2, where e is the base of the natural logarithms. In this fraction, the $N_i$ are all 1, and the $D_i$ are successively 1, 2, 1, 1, 4, 1, 1, 6, 1, 1, 8, . . .. Write a program that uses your cont-frac procedure from Exercise 1.37 to approximate e, based on Euler’s expansion.
 
-# Answer 1.38
+## Answer 1.38
 
 [Scripts/cont_e.py](Scripts/cont_e.py)
 
@@ -546,7 +625,7 @@ $$\tan{x} =\frac{x}{1 - \frac{x^2}{3 - \frac{x^2}{5 - ...}}}$$
 
 where x is in radians. Define a procedure (tan-cf x k) that computes an approximation to the tangent function based on Lambert’s formula. k specifies the number of terms to compute, as in Exercise 1.37.
 
-# Answer 1.39
+## Answer 1.39
 
 [Scripts/tan_cf.py](Scripts/tan_cf.py)
 
@@ -560,7 +639,7 @@ Define a procedure cubic that can be used together with the newtons-method proce
 
 to approximate zeros of the cubic $x^3 + ax^2 + bx + c$.
 
-# Answer 1.40
+## Answer 1.40
 
 [Scripts/cube_in_newtons_method.py](Scripts/cube_in_newtons_method.py)
 
@@ -572,7 +651,7 @@ Define a procedure double that takes a procedure of one argument as argument and
 (((double (double double)) inc) 5)
 ```
 
-# Answer 1.41
+## Answer 1.41
 
 13 ( 5 + 8 )
 
@@ -585,7 +664,7 @@ Let $f$ and $g$ be two one-argument functions.The composition $f$ after $g$ is d
 49
 ```
 
-# Answer 1.42
+## Answer 1.42
 
 [Scripts/compose.py](Scripts/compose.py)
 
@@ -600,7 +679,7 @@ If f is a numerical function and n is a positive integer, then we can form the n
 
 Hint: You may find it convenient to use compose from Exercise 1.42.
 
-# Answer 1.43
+## Answer 1.43
 
 [Scripts/repeated.py](Scripts/repeated.py)
 
@@ -609,7 +688,7 @@ Hint: You may find it convenient to use compose from Exercise 1.42.
 
 The idea of smoothing a function is an important concept in signal processing. If f is a function and dx is some small number, then the smoothed version of f is the function whose value at a point x is the average of $f (x − dx)$, $f (x)$, and $f (x +dx)$. Write a procedure smooth that takes as input a procedure that computes f and returns a procedure that computes the smoothed f . It is sometimes valuable to repeatedly smooth a function (that is, smooth the smoothed function, and so on) to obtain the n-fold smoothed function. Show how to generate the n-fold smoothed function of any given function using smooth and repeated from Exercise 1.43.
 
-# Answer 1.44
+## Answer 1.44
 
 [Scripts/smoothing.py](Scripts/smoothing.py)
 

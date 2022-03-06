@@ -7,3 +7,5 @@
 .#*.scm
 
 __pycache__
+
+.idea/
