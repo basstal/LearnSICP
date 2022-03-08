@@ -33,6 +33,22 @@
   - [Answer 2.20](#answer-220)
 - [Exercise 2.21](#exercise-221)
   - [Answer 2.21](#answer-221)
+- [Exercise 2.22](#exercise-222)
+  - [Answer 2.22](#answer-222)
+- [Exercise 2.23](#exercise-223)
+  - [Answer 2.23](#answer-223)
+- [Exercise 2.24](#exercise-224)
+  - [Answer 2.24](#answer-224)
+- [Exercise 2.25](#exercise-225)
+  - [Answer 2.25](#answer-225)
+- [Exercise 2.26](#exercise-226)
+- [Answer 2.26](#answer-226)
+- [Exercise 2.27](#exercise-227)
+- [Answer 2.27](#answer-227)
+- [Exercise 2.28](#exercise-228)
+  - [Answer 2.28](#answer-228)
+- [Exercise 2.29](#exercise-229)
+- [Exercise 2.30](#exercise-230)
 
 # Exercise 2.1
 
@@ -369,7 +385,203 @@ Here are two different definitions of square-list. Complete both of them by fill
 (define (square-list items)
     (if (null? items)
         nil
-        (cons ⟨??⟩ ⟨??⟩)))
+        (cons (2 * (car items)) 
+          (map square-list (cdr items)))))
 (define (square-list items)
-    (map ⟨??⟩ ⟨??⟩))
+    (map (2 * (car items)) items))
 ```
+
+# Exercise 2.22
+
+Louis Reasoner tries to rewrite the first square-list procedure of Exercise 2.21 so that it evolves an iterative process:
+
+```scheme
+(define (square-list items)
+  (define (iter things answer)
+    (if (null? things)
+      answer
+      (iter (cdr things)
+        (cons (square (car things))
+          answer))))
+  (iter items nil))
+```
+
+Unfortunately, defining square-list this way produces the answer list in the reverse order of the one desired. Why?
+Louis then tries to fix his bug by interchanging the arguments to cons:
+
+```scheme
+(define (square-list items)
+  (define (iter things answer)
+    (if (null? things)
+      answer
+      (iter (cdr things)
+        (cons answer
+          (square (car things))))))
+  (iter items nil))
+```
+
+This doesn’t work either. Explain.
+
+## Answer 2.22
+
+The first one which (cons (square (car things)) answer) will be called before (iter (cdr things) gathered_cons), this cause the gathered_cons insert next answer at the start of list. then the square-list answer is in the reverse order.
+
+The second one which is the same reason as first one. answer list is inserted before iterative to next number of things.
+
+# Exercise 2.23
+
+The procedure for-each is similar to map. It takes as arguments a procedure and a list of elements. However, rather than forming a list of the results, for-each just applies the procedure to each of the elements in turn, from left to right. The values returned by applying the procedure to the elements are not used at all—for-each is used with procedures that perform an action, such as printing. For example,
+
+```scheme
+(for-each (lambda (x)
+  (newline)
+  (display x))
+(list 57 321 88))
+57
+321
+88
+```
+
+The value returned by the call to for-each (not illustrated above) can be something arbitrary, such as true. Give an implementation of for-each.
+
+## Answer 2.23
+
+```scheme
+(define (for-each proc items)
+  (define (iter proc items)
+    (if (not (null? items))
+      (cons (proc (cdr items))
+        (iter (proc (car items))))))
+  (iter proc items))
+```
+
+# Exercise 2.24
+
+Suppose we evaluate the expression (list 1 (list 2 (list 3 4))). Give the result printed by the interpreter, the corresponding box-and-pointer structure, and the interpretation of this as a tree (as in Figure 2.6).
+
+## Answer 2.24
+
+![list_tree.drawio.png](./Drawio/list_tree.drawio.png)
+
+# Exercise 2.25
+
+Give combinations of cars and cdrs that will pick 7 from each of the following lists:
+
+```scheme
+(1 3 (5 7) 9)
+((7))
+(1 (2 (3 (4 (5 (6 7))))))
+```
+
+## Answer 2.25
+
+```scheme
+(car (cdr (car (car list))))
+(cdr (cdr list))
+(car (car (car (car  (car (car list))))))
+```
+
+# Exercise 2.26
+
+Suppose we define x and y to be two lists:
+
+```scheme
+(define x (list 1 2 3))
+(define y (list 4 5 6))
+```
+
+What result is printed by the interpreter in response to evaluating each of the following expressions:
+
+```scheme
+(append x y)
+(cons x y)
+(list x y)
+```
+
+# Answer 2.26
+
+```scheme
+(4 5 6 1 2 3)
+(1 2 3 4 5 6)
+((1 2 3) (4 5 6))
+```
+
+
+# Exercise 2.27
+
+Modify your reverse procedure of Exercise 2.18 to produce a deep-reverse procedure that takes a list as argument and returns as its value the list with its elements reversed and with all sublists deep-reversed as well. For example,
+
+```scheme
+(define x (list (list 1 2) (list 3 4)))
+x
+((1 2) (3 4))
+(reverse x)
+((3 4) (1 2))
+(deep-reverse x)
+((4 3) (2 1))
+```
+
+# Answer 2.27
+
+[Scripts/deep_reverse.py](Scripts/deep_reverse.py)
+
+
+# Exercise 2.28
+
+Write a procedure fringe that takes as argument a tree (represented as a list) and returns a list whose elements are all the leaves of the tree arranged in left-to-right order. For example,
+
+```scheme
+(define x (list (list 1 2) (list 3 4)))
+(fringe x)
+(1 2 3 4)
+(fringe (list x x))
+(1 2 3 4 1 2 3 4)
+```
+
+## Answer 2.28
+
+[Scripts/fringe.py](Scripts/fringe.py)
+
+# Exercise 2.29
+
+A binary mobile consists of two branches, a left branch and a right branch. Each branch is a rod of a certain length, from which hangs either a weight or another binary mobile. We can represent a binary mobile using compound data by constructing it from two branches (for example, using list):
+
+```scheme
+(define (make-mobile left right)
+  (list left right))
+```
+
+A branch is constructed from a length (which must be a number) together with a structure, which may be either a number (representing a simple weight) or another mobile:
+
+```scheme
+(define (make-branch length structure)
+  (list length structure))
+```
+
+
+a.	Write the corresponding selectors left-branch and right-branch, which return the branches of a mobile, and branch-length and branch-structure, which return the components of a branch.
+b.	Using your selectors, define a procedure total-weight that returns the total weight of a mobile.
+c.	A mobile is said to be balanced if the torque applied by its top-left branch is equal to that applied by its top-right branch (that is, if the length of the left rod multiplied by the weight hanging from that rod is equal to the corresponding product for the right side) and if each of the submobiles hanging off its branches is balanced. Design a predicate that tests whether a binary mobile is balanced.
+d. Suppose we change the representation of mobiles so that the constructors are
+
+```scheme
+(define (make-mobile left right) (cons left right))
+(define (make-branch length structure)
+  (cons length structure))
+```
+
+How much do you need to change your programs to convert to the new representation?
+
+# Exercise 2.30
+
+Define a procedure square-tree analogous to the square-list procedure of Exercise 2.21. That is, square-tree should behave as follows:
+
+```scheme
+(square-tree
+  (list 1
+    (list 2 (list 3 4) 5)
+    (list 6 7)))
+(1 (4 (9 16) 25) (36 49))
+```
+
+Define square-tree both directly (i.e., without using any higher-order procedures) and also by using map and recursion.

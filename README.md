@@ -13,13 +13,13 @@ This repository contains exercise and summary on reading Structure and Interpret
 
 ### Summary
 
-- [Chapter1 BuildingAbstractionsWithProcedures](./C1_BuildingAbstractionsWithProcedures/Summary.md)
+- [Chapter1 Building Abstractions with Procedures](./C1_BuildingAbstractionsWithProcedures/Summary.md)
 
 
 ### Exercise
 
-- [Chapter1 BuildingAbstractionsWithProcedures](./C1_BuildingAbstractionsWithProcedures/Exercise.md)
-- [Chapter2 BuildingAbstractionsWithData](./C2_BuildingAbstractionsWithData/Exercise.md)
+- [Chapter1 Building Abstractions with Procedures](./C1_BuildingAbstractionsWithProcedures/Exercise.md)
+- [Chapter2 Building Abstractions with Data](./C2_BuildingAbstractionsWithData/Exercise.md)
 
 ## Notes
 
@@ -27,4 +27,4 @@ This repository contains exercise and summary on reading Structure and Interpret
 
 ## Progress
 
-145/855
+153/855
