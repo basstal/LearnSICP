@@ -27,4 +27,4 @@ This repository contains exercise and summary on reading Structure and Interpret
 
 ## Progress
 
-153/855
+165/855

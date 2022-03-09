@@ -42,13 +42,27 @@
 - [Exercise 2.25](#exercise-225)
   - [Answer 2.25](#answer-225)
 - [Exercise 2.26](#exercise-226)
-- [Answer 2.26](#answer-226)
+  - [Answer 2.26](#answer-226)
 - [Exercise 2.27](#exercise-227)
-- [Answer 2.27](#answer-227)
+  - [Answer 2.27](#answer-227)
 - [Exercise 2.28](#exercise-228)
   - [Answer 2.28](#answer-228)
 - [Exercise 2.29](#exercise-229)
 - [Exercise 2.30](#exercise-230)
+  - [Answer 2.30](#answer-230)
+- [Exercise 2.31](#exercise-231)
+  - [Answer 2.31](#answer-231)
+- [Exercise 2.32](#exercise-232)
+- [Exercise 2.33](#exercise-233)
+  - [Answer 2.33](#answer-233)
+- [Exercise 2.34](#exercise-234)
+  - [Answer 2.34](#answer-234)
+- [Exercise 2.35](#exercise-235)
+  - [Answer 2.35](#answer-235)
+- [Exercise 2.36](#exercise-236)
+  - [Answer 2.36](#answer-236)
+- [Exercise 2.37](#exercise-237)
+  - [Answer 2.37](#answer-237)
 
 # Exercise 2.1
 
@@ -498,7 +512,7 @@ What result is printed by the interpreter in response to evaluating each of the 
 (list x y)
 ```
 
-# Answer 2.26
+## Answer 2.26
 
 ```scheme
 (4 5 6 1 2 3)
@@ -521,7 +535,7 @@ x
 ((4 3) (2 1))
 ```
 
-# Answer 2.27
+## Answer 2.27
 
 [Scripts/deep_reverse.py](Scripts/deep_reverse.py)
 
@@ -585,3 +599,188 @@ Define a procedure square-tree analogous to the square-list procedure of Exercis
 ```
 
 Define square-tree both directly (i.e., without using any higher-order procedures) and also by using map and recursion.
+
+## Answer 2.30
+
+```scheme
+(define (square-tree tree)
+  (map (lambda (sub-tree)
+    (if (pair? sub-tree)
+      (square-tree sub-tree)
+      (* sub-tree sub-tree)))
+    tree))
+
+(define (square-tree tree)
+  (cond ((null? tree) nil)
+    ((not (pair? sub-tree)) (* tree tree))
+    (else (cons (square-tree (car tree))
+          (square-tree (cdr tree))))))
+```
+
+# Exercise 2.31
+
+Abstract your answer to Exercise 2.30 to produce a procedure tree-map with the property that square-tree could be defined as
+
+```scheme
+(define (square-tree tree) (tree-map square tree))
+```
+
+## Answer 2.31
+
+```scheme
+(define (tree-map square tree)
+  (map (lambda (sub-tree)
+    (if (pair? sub-tree)
+      (tree-map square sub-tree)
+      (square sub-tree)))
+    tree))
+```
+
+# Exercise 2.32
+
+We can represent a set as a list of distinct elements, and we can represent the set of all subsets of the set as a list of lists. For example, if the set is (1 2 3), then the set of all subsets is (() (3) (2) (2 3) (1) (1 3)(1 2) (1 2 3)). Complete the following definition of a procedure that generates the set of subsets of a set and give a clear explanation of why it works:
+
+```scheme
+(define (subsets s)
+  (if (null? s)
+    (list nil)
+    (let ((rest (subsets (cdr s))))
+      (append rest (map ⟨??⟩ rest)))))
+```
+
+# Exercise 2.33
+
+Fill in the missing expressions to complete the following definitions of some basic list-manipulation operations as accumulations:
+
+```scheme
+(define (map p sequence)
+  (accumulate (lambda (x y) ⟨??⟩) nil sequence))
+(define (append seq1 seq2)
+  (accumulate cons ⟨??⟩ ⟨??⟩))
+(define (length sequence)
+  (accumulate ⟨??⟩ 0 sequence))
+```
+
+## Answer 2.33
+
+```scheme
+(define (map p sequence)
+  (accumulate (lambda (x y) ((p x) (p y))) nil sequence))
+(define (append seq1 seq2)
+  (accumulate cons seq1 seq2))
+(define (length sequence)
+  (accumulate (lambda (x y) (if (null? y) 0 (+ 1 (length y)))) 0 sequence))
+```
+
+# Exercise 2.34
+
+Evaluating a polynomial in x at a given value of x can be formulated as an accumulation. We evaluate the polynomial
+
+$$a_nx^n + a_{n−1}x^{n−1} + ... + a_1x + a_0$$
+
+using a well-known algorithm called Horner’s rule, which structures the computation as
+
+$$(... (a_nx + a_{n−1})x + ... + a_1)x + a_0.$$
+
+In other words, we start with $a_n$, multiply by x, add $a_{n−1}$, multiply by x, and so on, until we reach $a_0$.
+
+Fill in the following template to produce a procedure that evaluates a polynomial using Horner’s rule. Assume that the coeffcients of the polynomial are arranged in a sequence, from $a_0$ through $a_n$.
+
+```scheme
+(define (horner-eval x coefficient-sequence)
+  (accumulate (lambda (this-coeff higher-terms) ⟨??⟩)
+    0
+    coefficient-sequence))
+```
+
+For example, to compute $1+3x +5x^3 +x^5$ at x = 2 you would evaluate
+
+```scheme
+(horner-eval 2 (list 1 3 0 5 0 1))
+```
+
+## Answer 2.34
+
+```scheme
+(define (horner-eval x coefficient-sequence)
+  (accumulate (lambda (this-coeff higher-terms) (+ this-coeff (* (horner-eval x higher-terms) x)))
+    0
+    coefficient-sequence))
+```
+
+# Exercise 2.35
+
+Redefine count-leaves from Section 2.2.2 as an accumulation:
+
+```scheme
+(define (count-leaves t)
+  (accumulate ⟨??⟩ ⟨??⟩ (map ⟨??⟩ ⟨??⟩)))
+```
+
+## Answer 2.35
+
+```scheme
+(define (count-leaves t)
+  (accumulate (lambda (x y) (if (null? y) 1 (+ 1 (count-leaves y))) (car t) (map count-leaves (cdr t)))))
+```
+
+# Exercise 2.36
+
+The procedure accumulate-n is similar to accumulate except that it takes as its third argument a sequence of sequences, which are all assumed to have the same number of elements. It applies the designated accumulation procedure to combine all the first elements of the sequences, all the second elements of the sequences, and so on, and returns a sequence of the results. For instance, if s is a sequence containing four sequences, ((1 2 3) (4 5 6)(7 8 9) (10 11 12)), then the value of (accumulate-n + 0 s) should be the sequence (22 26 30). Fill in the missing expressions in the following definition of accumulate-n:
+
+```scheme
+(define (accumulate-n op init seqs)
+  (if (null? (car seqs))
+    nil
+    (cons (accumulate op init ⟨??⟩)
+      (accumulate-n op init ⟨??⟩))))
+```
+
+## Answer 2.36
+
+```scheme
+(define (accumulate-n op init seqs)
+  (if (null? (car seqs))
+    nil
+    (cons (accumulate op init (map (lambda (x) (car x)) seqs))
+      (accumulate-n op init (cons (map (lambda (x) (cdr x)) seqs))))))
+```
+
+# Exercise 2.37
+
+Suppose we represent vectors $v = (v_i )$ as sequences of numbers, and matrices $m = (m_{ij} )$ as sequences of vectors (the rows of the matrix). For example, the matrix
+
+$$\begin{pmatrix} 1 & 2 & 3 & 4 \\
+4 & 5 & 6 & 7 \\
+6 & 7 & 8 & 9 \end{pmatrix} $$
+
+is represented as the sequence ((1 2 3 4) (4 5 6 6)(6 7 8 9)). With this representation, we can use sequence operations to concisely express the basic matrix and vector operations. These operations (which are described in any book on matrix algebra) are the following:
+
+(dot-product v w) returns the sum $\sum_iv_iw_i$;
+
+(matrix-*-vector m v) returns the vector t, where $t_i = \sum_jm_{ij} v_j$ ;
+
+(matrix-*-matrix m n) returns the matrix p, where $p_{ij} = \sum_km_{ik}n_{kj}$ ;
+
+(transpose m) returns the matrix n, where $n_{ij} = m_{ji}$ .
+
+We can define the dot product as
+
+```scheme
+(define (dot-product v w)
+  (accumulate + 0 (map * v w)))
+```
+
+Fill in the missing expressions in the following procedures for computing the other matrix operations. (The procedure accumulate-n is defined in Exercise 2.36.)
+
+```scheme
+(define (matrix-*-vector m v)
+  (map ⟨??⟩ m))
+(define (transpose mat)
+  (accumulate-n ⟨??⟩ ⟨??⟩ mat))
+(define (matrix-*-matrix m n)
+  (let ((cols (transpose n)))
+    (map ⟨??⟩ m)))
+```
+
+## Answer 2.37
