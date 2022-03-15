@@ -63,6 +63,10 @@
   - [Answer 2.36](#answer-236)
 - [Exercise 2.37](#exercise-237)
   - [Answer 2.37](#answer-237)
+- [Exercise 2.38](#exercise-238)
+  - [Answer 2.38](#answer-238)
+- [Exercise 2.39](#exercise-239)
+- [Exercise 2.40](#exercise-240)
 
 # Exercise 2.1
 
@@ -784,3 +788,60 @@ Fill in the missing expressions in the following procedures for computing the ot
 ```
 
 ## Answer 2.37
+
+```scheme
+(define (matrix-*-vector m v)
+  (map (lambda (mi) (
+    accumulate + 0 (map * v mi))) m))
+(define (transpose mat)
+  (accumulate-n ⟨??⟩ ⟨??⟩ mat))
+(define (matrix-*-matrix m n)
+  (let ((cols (transpose n)))
+    (map ⟨??⟩ m)))
+```
+
+# Exercise 2.38
+
+The accumulate procedure is also known as fold-right, because it combines the first element of the sequence with the result of combining all the elements to the right. There is also a fold-left, which is similar to fold-right, except that it combines elements working in the opposite direction:
+
+```scheme
+(define (fold-left op initial sequence)
+  (define (iter result rest)
+    (if (null? rest)
+      result
+      (iter (op result (car rest))
+        (cdr rest))))
+  (iter initial sequence))
+```
+
+What are the values of
+
+```scheme
+(fold-right / 1 (list 1 2 3))
+(fold-left / 1 (list 1 2 3))
+(fold-right list nil (list 1 2 3))
+(fold-left list nil (list 1 2 3))
+```
+
+Give a property that op should satisfy to guarantee that fold-right and fold-left will produce the same values for any sequence.
+
+## Answer 2.38
+
+[Scirpts/fold.py](./Scripts/fold.py)
+
+# Exercise 2.39
+
+Complete the following definitions of reverse (Exercise 2.18) in terms of fold-right and fold-left from Exercise 2.38:
+
+```scheme
+(define (reverse sequence)
+  (fold-right (lambda (x y) ⟨??⟩) nil sequence))
+(define (reverse sequence)
+  (fold-left (lambda (x y) ⟨??⟩) nil sequence))
+```
+
+
+# Exercise 2.40
+
+Define a procedure unique-pairs that, given an integer n, generates the sequence of pairs (i, j) with 1 ≤ j < i ≤ n. Use unique-pairs to simplify the definition of prime-sum-pairs given above.
+
