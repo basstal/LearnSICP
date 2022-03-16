@@ -25,10 +25,16 @@ def div(a, b):
 
 
 def append_list(a, b):
+    if a is None:
+        return b
+    if b is None:
+        return a
     if type(a) is list:
-        return list(a).append(b)
+        a.append(b)
+        return a
     elif type(b) is list:
-        return list(b).append(a)
+        b.append(a)
+        return b
     else:
         return [a, b]
 

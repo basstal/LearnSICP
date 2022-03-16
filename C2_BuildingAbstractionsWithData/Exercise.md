@@ -67,6 +67,9 @@
   - [Answer 2.38](#answer-238)
 - [Exercise 2.39](#exercise-239)
 - [Exercise 2.40](#exercise-240)
+  - [Answer 2.40](#answer-240)
+- [Exercise 2.41](#exercise-241)
+  - [Answer 2.41](#answer-241)
 
 # Exercise 2.1
 
@@ -845,3 +848,14 @@ Complete the following definitions of reverse (Exercise 2.18) in terms of fold-r
 
 Define a procedure unique-pairs that, given an integer n, generates the sequence of pairs (i, j) with 1 ≤ j < i ≤ n. Use unique-pairs to simplify the definition of prime-sum-pairs given above.
 
+## Answer 2.40
+
+[Scripts/unique_pairs.py](./Scripts/unique_pairs.py)
+
+# Exercise 2.41
+
+Write a procedure to find all ordered triples of distinct positive integers i, j, and k less than or equal to a given integer n that sum to a given integer s.
+
+## Answer 2.41
+
+[Scripts/find_ijk.py](./Scripts/find_ijk.py)

@@ -48,10 +48,19 @@ def fast_is_prime(n, times):
     else:
         return False
 
+def expmod(base, exp, m):
+    if exp == 0:
+        return 1
+    elif exp % 2 == 0:
+        return int(math.pow(expmod(base, exp // 2, m), 2) % m)
+    else:
+        return int((base * expmod(base, exp - 1, m)) % m)
+
 def fermat_test(n):
     def try_it(a):
-        return math.exp(a, n) % n == a
-    return try_it(1 + random.randint(1, n - 1))
+        assert(a < n)
+        return a ** n % n == a
+    return try_it(random.randint(1, n - 1))
 
 def timed_prime_test1(n):
     print('\n')
@@ -80,3 +89,6 @@ if __name__ == "__main__":
     search_for_primes(10001, 99999)
     search_for_primes(100001, 999999)
     search_for_primes(1000001, 9999999)
+    test_values = [5, 9, 19, 21, 25]
+    for value in test_values:
+        print(f"{value} is prime ? ", start_prime_test1(value, 0))
