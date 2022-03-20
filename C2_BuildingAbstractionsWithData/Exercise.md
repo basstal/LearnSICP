@@ -70,6 +70,27 @@
   - [Answer 2.40](#answer-240)
 - [Exercise 2.41](#exercise-241)
   - [Answer 2.41](#answer-241)
+- [Exercise 2.42](#exercise-242)
+- [Exercise 2.43](#exercise-243)
+- [Exercise 2.44](#exercise-244)
+- [Exercise 2.45](#exercise-245)
+- [Exercise 2.46](#exercise-246)
+  - [Answer 2.46](#answer-246)
+- [Exercise 2.47](#exercise-247)
+- [Exercise 2.48](#exercise-248)
+  - [Answer 2.48](#answer-248)
+- [Exercise 2.49](#exercise-249)
+- [Exercise 2.50](#exercise-250)
+- [Exercise 2.51](#exercise-251)
+- [Exercise 2.52](#exercise-252)
+- [Exercise 2.53](#exercise-253)
+  - [Answer 2.53](#answer-253)
+- [Exercise 2.54](#exercise-254)
+  - [Answer 2.54](#answer-254)
+- [Exercise 2.55](#exercise-255)
+  - [Answer 2.55](#answer-255)
+- [Exercise 2.56](#exercise-256)
+  - [Answer 2.56](#answer-256)
 
 # Exercise 2.1
 
@@ -859,3 +880,186 @@ Write a procedure to find all ordered triples of distinct positive integers i, j
 ## Answer 2.41
 
 [Scripts/find_ijk.py](./Scripts/find_ijk.py)
+
+# Exercise 2.42
+
+The “eight-queens puzzle” asks how to place eight queens on a chessboard so that no queen is in check from any other (i.e., no two queens are in the same row, column, or diagonal). One possible solution is shown in Figure 2.8. One way to solve the puzzle is to work across the board, placing a queen in each column. Once we have placed k − 1 queens, we must place the kth queen in a position where it does not check any of the queens already on the board. We can formulate this approach recursively: Assume that we have already generated the sequence of all possible ways to place k − 1 queens in the ﬁrst k − 1 columns of the board. For each of these ways, generate an extended set of positions by placing a queen in each row of the kth column. Now filter these, keeping only the positions for which the queen in the kth column is safe with respect to the other queens. This produces the sequence of all ways to place k queens in the ﬁrst k columns. By continuing this process, we will produce not only one solution, but all solutions to the puzzle.
+We implement this solution as a procedure queens, which returns a sequence of all solutions to the problem of placing n queens on an $n \times n$ chessboard. queens has an internal procedure queen-cols that returns the sequence of all ways to place queens in the first k columns of the board.
+
+```scheme
+(define (queens board-size)
+  (define (queen-cols k)
+    (if (= k 0)
+      (list empty-board)
+      (filter
+        (lambda (positions) (safe? k positions))
+        (flatmap
+          (lambda (rest-of-queens)
+            (map (lambda (new-row)
+              (adjoin-position
+                new-row k rest-of-queens))
+          (enumerate-interval 1 board-size)))
+  (queen-cols (- k 1))))))(queen-cols board-size))
+```
+
+In this procedure rest-of-queens is a way to place k − 1 queens in the first k −1 columns, and new-row is a proposed row in which to place the queen for the kth column. Complete the program by implementing the representation for sets of board positions, including the procedure adjoin-position, which adjoins a new row-column position to a set of positions, and empty-board, which represents an empty set of positions. You must also write the procedure safe?, which determines for a set of positions, whether the queen in the kth column is safe with respect to the others. (Note that we need only check whether the new queen is safe—the other queens are already guaranteed safe with respect to each other.)
+
+# Exercise 2.43
+
+Louis Reasoner is having a terrible time doing Exercise 2.42. His queens procedure seems to work, but it runs extremely slowly. (Louis never does manage to wait long enough for it to solve even the $6 \times 6$ case.) When Louis asks Eva Lu Ator for help, she points out that he has interchanged the order of the nested mappings in the flatmap, writing it as
+
+```scheme
+(flatmap
+  (lambda (new-row)
+    (map (lambda (rest-of-queens)
+        (adjoin-position new-row k rest-of-queens))
+      (queen-cols (- k 1))))
+  (enumerate-interval 1 board-size))
+```
+
+Explain why this interchange makes the program run slowly. Estimate how long it will take Louis’s program to solve the eight-queens puzzle, assuming that the program in Exercise 2.42 solves the puzzle in time T .
+
+# Exercise 2.44
+
+Define the procedure up-split used by corner-split. It is similar to right-split, except that it switches the roles of below and beside.
+
+# Exercise 2.45
+
+right-split and up-split can be expressed as instances of a general splitting operation. Define a procedure split with the property that evaluating
+
+```scheme
+(define right-split (split beside below))
+(define up-split (split below beside))
+```
+
+produces procedures right-split and up-split with the same behaviors as the ones already defined.
+
+# Exercise 2.46
+
+A two-dimensional vector v running from the origin to a point can be represented as a pair consisting of an x-coordinate and a y-coordinate. Implement a data abstraction for vectors by giving a constructor make-vect and corresponding selectors xcor-vect and ycor-vect. In terms of your selectors and constructor, implement procedures add-vect, sub-vect, and scale-vect that perform the operations vector addition, vector subtraction, and multiplying a vector by a scalar:
+
+$$(x_1, y_1) + (x_2, y_2) = (x_1 + x_2, y_1 + y_2),$$
+$$(x_1, y_1) − (x_2, y_2) = (x_1 − x_2, y_1 − y_2),$$
+$$s \cdot (x , y) = (sx , sy).$$
+
+## Answer 2.46
+
+[Scripts/vector_operation.py](./Scripts/vector_operation.py)
+
+# Exercise 2.47
+
+Here are two possible constructors for frames:
+
+```scheme
+(define (make-frame origin edge1 edge2)
+  (list origin edge1 edge2))
+(define (make-frame origin edge1 edge2)
+  (cons origin (cons edge1 edge2)))
+```
+
+For each constructor supply the appropriate selectors to produce an implementation for frames.
+
+# Exercise 2.48
+
+A directed line segment in the plane can be represented as a pair of vectors—the vector running from the origin to the start-point of the segment, and the vector running from the origin to the end-point of the segment. Use your vector representation from Exercise 2.46 to define a representation for segments with a constructor make-segment and selectors start-segment and end-segment.
+
+## Answer 2.48
+
+[Scripts/segments.py](./Scripts/segments.py)
+
+# Exercise 2.49 
+
+Use segments->painter to define the following primitive painters:
+
+a.	The painter that draws the outline of the designated frame.
+b.	The painter that draws an “X” by connecting opposite corners of the frame.
+c.	The painter that draws a diamond shape by connecting the midpoints of the sides of the frame.
+d.	The wave painter.
+
+# Exercise 2.50
+
+Define the transformation flip-horiz, which flips painters horizontally, and transformations that rotate painters counterclockwise by 180 degrees and 270 degrees.
+
+# Exercise 2.51
+
+Define the below operation for painters. below takes two painters as arguments. The resulting painter, given a frame, draws with the first painter in the bottom of the frame and with the second painter in the top. Define below in two different ways—first by writing a procedure that is analogous to the beside procedure given above, and again in terms of beside and suitable rotation operations (from Exercise 2.50).
+
+# Exercise 2.52
+
+Make changes to the square limit of wave shown in Figure 2.9 by working at each of the levels described above. In particular:
+
+a.	Add some segments to the primitive wave painter of Exercise 2.49 (to add a smile, for example).
+b.	Change the pattern constructed by corner-split (for example, by using only one copy of the up-split and right-split images instead of two).
+c.	Modify the version of square-limit that uses square-of-four so as to assemble the corners in a different pattern. (For example, you might make the big Mr. Rogers look outward from each corner of the square.)
+
+# Exercise 2.53
+
+What would the interpreter print in response to evaluating each of the following expressions?
+
+```scheme
+(list 'a 'b 'c)
+(list (list 'george))
+(cdr '((x1 x2) (y1 y2)))
+(cadr '((x1 x2) (y1 y2)))
+(pair? (car '(a short list)))
+(memq 'red '((red shoes) (blue socks)))
+(memq 'red '(red shoes blue socks))
+```
+
+## Answer 2.53
+
+```scheme
+(list 'a 'b 'c)                         -> (a, b, c)
+(list (list 'george))                   -> ((george))
+(cdr '((x1 x2) (y1 y2)))                -> (y1 y2)
+(cadr '((x1 x2) (y1 y2)))               -> (x1 x2)
+(pair? (car '(a short list)))           -> ()
+(memq 'red '((red shoes) (blue socks))) -> ()
+(memq 'red '(red shoes blue socks))     -> (shoes blue socks)
+```
+
+# Exercise 2.54
+
+Two lists are said to be equal? if they contain equal elements arranged in the same order. For example,
+
+```scheme
+(equal? '(this is a list) '(this is a list))
+```
+
+is true, but
+
+```scheme
+(equal? '(this is a list) '(this (is a) list))
+```
+
+is false. To be more precise, we can define equal? recursively in terms of the basic eq? equality of symbols by saying that a and b are equal? if they are both symbols and the symbols are eq?, or if they are both lists such that (car a) is equal? to (car b) and (cdr a) is equal? to (cdr b). Using this idea, implement equal? as a procedure.
+
+## Answer 2.54
+
+[Scripts/equal.py](./Scripts/equal.py)
+
+# Exercise 2.55
+
+Eva Lu Ator types to the interpreter the expression
+
+```scheme
+(car ''abracadabra)
+```
+
+To her surprise, the interpreter prints back quote. Explain.
+
+## Answer 2.55
+
+''abracadabra will be reinterpreter as literal value 'abracadabra, so car will return the first character in this literal value, it's back quate off course.
+
+
+# Exercise 2.56
+
+Show how to extend the basic differentiator to handle more kinds of expressions. For instance, implement the differentiation rule
+
+$$\frac{d(u^n)}{dx} = nu^{n-1}\frac{du}{dx}$$
+
+by adding a new clause to the deriv program and defining appropriate procedures exponentiation?, base, exponent, and make-exponentiation. (You may use the symbol ** to denote exponentiation.) Build in the rules that anything raised to the power 0 is 1 and anything raised to the power 1 is the thing itself.
+
+## Answer 2.56
+
