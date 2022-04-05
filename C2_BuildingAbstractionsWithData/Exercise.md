@@ -90,7 +90,20 @@
 - [Exercise 2.55](#exercise-255)
   - [Answer 2.55](#answer-255)
 - [Exercise 2.56](#exercise-256)
-  - [Answer 2.56](#answer-256)
+- [Exercise 2.57](#exercise-257)
+- [Exercise 2.58](#exercise-258)
+- [Exercise 2.59](#exercise-259)
+  - [Answer 2.59](#answer-259)
+- [Exercise 2.60](#exercise-260)
+  - [Answer 2.60](#answer-260)
+- [Exercise 2.61](#exercise-261)
+  - [Answer 2.61](#answer-261)
+- [Exercise 2.62](#exercise-262)
+  - [Answer 2.62](#answer-262)
+- [Exercise 2.63](#exercise-263)
+- [Exercise 2.64:](#exercise-264)
+- [Exercise 2.65](#exercise-265)
+- [Exercise 2.66](#exercise-266)
 
 # Exercise 2.1
 
@@ -1061,5 +1074,126 @@ $$\frac{d(u^n)}{dx} = nu^{n-1}\frac{du}{dx}$$
 
 by adding a new clause to the deriv program and defining appropriate procedures exponentiation?, base, exponent, and make-exponentiation. (You may use the symbol ** to denote exponentiation.) Build in the rules that anything raised to the power 0 is 1 and anything raised to the power 1 is the thing itself.
 
-## Answer 2.56
+
+# Exercise 2.57
+
+Extend the differentiation program to handle sums and products of arbitrary numbers of (two or more) terms. Then the last example above could be expressed as
+
+```scheme
+(deriv '(* x y (+ x 3)) 'x)
+```
+
+Try to do this by changing only the representation for sums and products, without changing the deriv procedure at all. For example, the addend of a sum would be the first term, and the augend would be the sum of the rest of the terms.
+
+
+# Exercise 2.58
+
+Suppose we want to modify the differentiation program so that it works with ordinary mathematical notation, in which + and * are infix rather than prefix operators. Since the differentiation program is defined in terms of abstract data, we can modify it to work with different representations of expressions solely by changing the predicates, selectors, and constructors that define the representation of the algebraic expressions on which the differentiator is to operate.
+
+a.	Show how to do this in order to differentiate algebraic expressions presented in infix form, such as (x + (3 *	(x + (y + 2)))). To simplify the task, assume that + and * always take two arguments and that expressions are fully parenthesized.
+
+b. The problem becomes substantially harder if we allow standard algebraic notation, such as (x + 3 * (x + y + 2)), which drops unnecessary parentheses and assumes that multiplication is done before addition. Can you design appropriate predicates, selectors, and constructors for this notation such that our derivative program still works?
+
+# Exercise 2.59
+
+Implement the union-set operation for the unordered-list representation of sets.
+
+## Answer 2.59
+
+[Scirpts/union_set.py](./Scripts/union_set.py)
+
+# Exercise 2.60
+
+We specified that a set would be represented as a list with no duplicates. Now suppose we allow duplicates. For instance, the set {1, 2, 3} could be represented as the list (2 3 2 1 3 2 2). Design procedures element-of-set?, adjoin-set, union-set, and intersection-set that operate on this representation. How does the effciency of each compare with the corresponding procedure for the non-duplicate representation? Are there applications for which you would use this representation in preference to the non-duplicate one?
+
+## Answer 2.60
+
+[Scripts/duplicates_set.py](./Scripts/duplicates_set.py)
+
+# Exercise 2.61
+
+Give an implementation of adjoin-set using the ordered representation. By analogy with element-of-set? show how to take advantage of the ordering to produce a procedure that requires on the average about half as many steps as with the unordered representation.
+
+## Answer 2.61
+
+[Scripts/adjoin_set_ordered.py](./Scripts/adjoin_set_ordered.py)
+
+
+# Exercise 2.62
+
+Give a $\Theta(n)$ implementation of union-set for sets represented as ordered lists.
+
+## Answer 2.62
+
+[Scripts/union_set_ordered.py](./Scripts/union_set_ordered.py)
+
+# Exercise 2.63
+
+Each of the following two procedures converts a binary tree to a list.
+
+```scheme
+(define (tree->list-1 tree)
+  (if (null? tree)
+  '()
+  (append (tree->list-1 (left-branch tree))
+    (cons (entry tree)
+      (tree->list-1
+        (right-branch tree))))))
+
+(define (tree->list-2 tree)
+  (define (copy-to-list tree result-list)
+    (if (null? tree)
+      result-list
+      (copy-to-list (left-branch tree)
+        (cons (entry tree)
+          (copy-to-list
+            (right-branch tree) 
+            result-list)))))
+  (copy-to-list tree '()))
+```
+
+a. Do the two procedures produce the same result for every tree? If not, how do the results differ? What lists do the two procedures produce for the trees in Figure 2.16?
+
+b. Do the two procedures have the same order of growth in the number of steps required to convert a balanced tree with n elements to a list? If not, which one grows more slowly?
+
+# Exercise 2.64: 
+
+The following procedure list->tree converts an ordered list to a balanced binary tree. The helper procedure partial-tree takes as arguments an integer n and list of at least n elements and constructs a balanced tree containing the first n elements of the list. The result returned by partial-tree is a pair (formed with cons) whose car is the constructed tree and whose cdr is the list of elements not included in the tree.
+
+```scheme
+(define (list->tree elements)
+  (car (partial-tree elements (length elements))))
+(define (partial-tree elts n)
+  (if (= n 0)
+    (cons '() elts)
+    (let ((left-size (quotient (- n 1) 2)))
+      (let ((left-result
+            (partial-tree elts left-size)))
+        (let ((left-tree (car left-result))
+            (non-left-elts (cdr left-result))
+            (right-size (- n (+ left-size 1))))
+          (let ((this-entry (car non-left-elts))
+            (right-result
+              (partial-tree
+                (cdr non-left-elts) 
+                right-size)))
+            (let ((right-tree (car right-result))
+                (remaining-elts
+                (cdr right-result)))
+              (cons (make-tree this-entry
+                              left-tree
+                              right-tree)
+                    remaining-elts))))))))
+```
+
+a.	Write a short paragraph explaining as clearly as you can how partial-tree works. Draw the tree produced by list->tree for the list (1 3 5 7 9 11).
+b.	What is the order of growth in the number of steps required by list->tree to convert a list of n elements?
+
+# Exercise 2.65
+
+Use the results of Exercise 2.63 and Exercise 2.64 to give $\Theta(n)$ implementations of union-set and intersection-set for sets implemented as (balanced) binary trees.
+
+# Exercise 2.66
+
+Implement the lookup procedure for the case where the set of records is structured as a binary tree, ordered by the numerical values of the keys.
 
