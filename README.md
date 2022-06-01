@@ -2,29 +2,22 @@
   - [Contents](#contents)
     - [Summary](#summary)
     - [Exercise](#exercise)
-  - [Notes](#notes)
   - [Progress](#progress)
 
 # LearnSICP
 
-This repository contains exercise and summary on reading Structure and Interpretation of Computer Programs(SICP)(second edition).
+This repository contains exercise and summary in learning CS61A Spring 2018.
+
+Textbook on http://www.composingprograms.com/
+
+CS 61A: Structure and Interpretation of Computer Programs on https://inst.eecs.berkeley.edu/~cs61a/sp18/
 
 ## Contents
 
 ### Summary
 
-- [Chapter1 Building Abstractions with Procedures](./C1_BuildingAbstractionsWithProcedures/Summary.md)
-
+- [1.1 Getting Started]
 
 ### Exercise
 
-- [Chapter1 Building Abstractions with Procedures](./C1_BuildingAbstractionsWithProcedures/Exercise.md)
-- [Chapter2 Building Abstractions with Data](./C2_BuildingAbstractionsWithData/Exercise.md)
-
-## Notes
-
-- python as exercise programming language.
-
 ## Progress
-
-236/855
