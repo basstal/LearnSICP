@@ -14,6 +14,10 @@ CS 61A: Structure and Interpretation of Computer Programs on https://inst.eecs.b
 
 ## Contents
 
+requirements.txt dictate py module that used in run.py.
+
+I use run.py to export the ok program to another folder for integration, through copy ok in executing and ignore the copied file in .gitignore.
+
 ### Summary
 
 - [1.1 Getting Started]

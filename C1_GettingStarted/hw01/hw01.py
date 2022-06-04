@@ -1,4 +1,6 @@
+from math import floor
 from operator import add, sub
+
 
 def a_plus_abs_b(a, b):
     """Return a+abs(b), but without calling abs.
@@ -9,10 +11,11 @@ def a_plus_abs_b(a, b):
     5
     """
     if b < 0:
-        f = lambda a,b:a-b
+        f = lambda a, b: a - b
     else:
-        f = lambda a,b:a+b
+        f = lambda a, b: a + b
     return f(a, b)
+
 
 def two_of_three(a, b, c):
     """Return x*x + y*y, where x and y are the two largest members of the
@@ -27,7 +30,8 @@ def two_of_three(a, b, c):
     >>> two_of_three(5, 5, 5)
     50
     """
-    return _____
+    return a * a + b * b if a >= c and b >= c else a * a + c * c if a >= b and c >= b else b * b + c * c
+
 
 def largest_factor(n):
     """Return the largest factor of n that is smaller than n.
@@ -39,7 +43,8 @@ def largest_factor(n):
     >>> largest_factor(13) # factor is 1 since 13 is prime
     1
     """
-    "*** YOUR CODE HERE ***"
+    return max(i for i in range(n // 2, 0, -1) if n % i == 0)
+
 
 def if_function(condition, true_result, false_result):
     """Return true_result if condition is a true value, and
@@ -70,17 +75,25 @@ def with_if_statement():
     else:
         return f()
 
+
 def with_if_function():
     return if_function(c(), t(), f())
 
+
 def c():
-    "*** YOUR CODE HERE ***"
+    global f
+    f = lambda: 1
+    return False
+
 
 def t():
-    "*** YOUR CODE HERE ***"
+    global f
+    f = lambda: 2
+
 
 def f():
-    "*** YOUR CODE HERE ***"
+    None
+
 
 def hailstone(n):
     """Print the hailstone sequence starting at n and return its
@@ -97,4 +110,14 @@ def hailstone(n):
     >>> a
     7
     """
-    "*** YOUR CODE HERE ***"
+    c = 0
+    while n != 1:
+        print(floor(n))
+        c += 1
+        if n % 2 == 0:
+            n /= 2
+        else:
+            n *= 3
+            n += 1
+    print(1)
+    return c + 1
