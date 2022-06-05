@@ -12,6 +12,8 @@ Textbook on http://www.composingprograms.com/
 
 CS 61A: Structure and Interpretation of Computer Programs on https://inst.eecs.berkeley.edu/~cs61a/sp18/
 
+Video on https://www.bilibili.com/video/BV16W411W76H
+
 ## Contents
 
 requirements.txt dictate py module that used in run.py.
