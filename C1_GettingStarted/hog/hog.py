@@ -278,7 +278,8 @@ def max_scoring_num_rolls(dice=six_sided, num_samples=1000):
     max_avg = -1
     result = 0
     for num_rolls in range(10, 0, -1):
-        get_avg = make_averaged(lambda: roll_dice(num_rolls, dice), num_samples)
+        get_avg = make_averaged(lambda: roll_dice(num_rolls, dice),
+                                num_samples)
         avg = get_avg()
         if avg > max_avg:
             result = num_rolls
@@ -318,10 +319,10 @@ def run_experiments():
     if True:  # Change to True to test bacon_strategy
         print('bacon_strategy win rate:', average_win_rate(bacon_strategy))
 
-    if False:  # Change to True to test swap_strategy
+    if True:  # Change to True to test swap_strategy
         print('swap_strategy win rate:', average_win_rate(swap_strategy))
 
-    if False:  # Change to True to test final_strategy
+    if True:  # Change to True to test final_strategy
         print('final_strategy win rate:', average_win_rate(final_strategy))
     "*** You may add additional experiments as you wish ***"
 
@@ -343,17 +344,39 @@ def swap_strategy(score, opponent_score, margin=8, num_rolls=4):
     NUM_ROLLS.
     """
     # BEGIN PROBLEM 11
-    return 4  # Replace this statement
+    bacon = free_bacon(opponent_score)
+
+    if bacon >= margin or (is_swap(score + bacon, opponent_score)
+                           and score + bacon < opponent_score):
+        return 0
+    return num_rolls
+
     # END PROBLEM 11
 
 
 def final_strategy(score, opponent_score):
-    """Write a brief description of your final strategy.
-
-    *** YOUR DESCRIPTION HERE ***
+    """
+    swap_strategy is a good default strategy to start with.
+    There's no point in scoring more than 100. Check whether you can win by rolling 0, 1 or 2 dice. If you are in the lead, you might take fewer risks.
+    Try to force a beneficial swap.
+    Choose the num_rolls and margin arguments carefully.
     """
     # BEGIN PROBLEM 12
-    return 4  # Replace this statement
+    if score > opponent_score:
+        if GOAL_SCORE - score < 2:
+            return 0
+        elif GOAL_SCORE - score < 4:
+            return 1
+        elif GOAL_SCORE - score < 6:
+            return 2
+    elif score > 0:
+        swap_diff = opponent_score % score
+        bacon_score = free_bacon(opponent_score)
+        if bacon_score == swap_diff and opponent_score > score + bacon_score:
+            return 0
+        # elif swap_diff < 13:
+        #     return swap_diff // 6
+    return swap_strategy(score, opponent_score, 9, 7)
     # END PROBLEM 12
 
 

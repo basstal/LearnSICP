@@ -7,13 +7,17 @@ import pyutils.fsext as fs
 import pyutils.simplelogger as logger
 
 sub_project = {
-    'hog': ['-q 01', '-q 02 -u', '-q 02', '-q 03 -u', '-q 03', '-q 04 -u', '-q 04', '-q 05 -u', '-q 05', '-q 06 -u', '-q 06', '-q 07', '-q 08 -u', '-q 08', '-q 09 -u', '-q 09', '-q 10 -u', '-q 10'],
+    'hog': [
+        '-q 01', '-q 02 -u', '-q 02', '-q 03 -u', '-q 03', '-q 04 -u', '-q 04',
+        '-q 05 -u', '-q 05', '-q 06 -u', '-q 06', '-q 07', '-q 08 -u', '-q 08',
+        '-q 09 -u', '-q 09', '-q 10 -u', '-q 10', '-q 11 -u', '-q 11', '-q 12'
+    ],
     'hw01': [''],
+    'hw02': [''],
     'lab00': [''],
     'lab01': [''],
 }
 only_lastest = True
-
 
 if __name__ == "__main__":
     proj = sys.argv[1]
