@@ -1,18 +1,25 @@
 HW_SOURCE_FILE = 'hw02.py'
 
+
 def square(x):
     return x * x
+
 
 def identity(x):
     return x
 
-triple = lambda x: 3 * x
 
-increment = lambda x: x + 1
+def triple(x): return 3 * x
 
-add = lambda x, y: x + y
 
-mul = lambda x, y: x * y
+def increment(x): return x + 1
+
+
+def add(x, y): return x + y
+
+
+def mul(x, y): return x * y
+
 
 def product(n, term):
     """Return the product of the first n terms in a sequence.
@@ -32,10 +39,14 @@ def product(n, term):
     >>> product(3, triple)    # 1*3 * 2*3 * 3*3
     162
     """
-    "*** YOUR CODE HERE ***"
+    if n > 0:
+        return term(n) * product(n - 1, term)
+    return 1
+
 
 # The identity function, defined using a lambda expression!
-identity = lambda k: k
+def identity(k): return k
+
 
 def factorial(n):
     """Return n factorial for n >= 0 by calling product.
@@ -48,7 +59,8 @@ def factorial(n):
     >>> check(HW_SOURCE_FILE, 'factorial', ['Recursion', 'For', 'While'])
     True
     """
-    "*** YOUR CODE HERE ***"
+    return product(n, identity)
+
 
 def make_adder(n):
     """Return a function that takes an argument K and returns N + K.
@@ -59,5 +71,4 @@ def make_adder(n):
     >>> make_adder(1)(2)
     3
     """
-    "*** YOUR CODE HERE ***"
-    return 'REPLACE ME'
+    return lambda x: x+n

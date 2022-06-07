@@ -13,9 +13,10 @@ sub_project = {
         '-q 09 -u', '-q 09', '-q 10 -u', '-q 10', '-q 11 -u', '-q 11', '-q 12'
     ],
     'hw01': [''],
-    'hw02': [''],
+    'hw02': ['-q product', '-q factorial', '-q make_adder'],
     'lab00': [''],
     'lab01': [''],
+    'lab02': ['-q lambda -u', '-q hof -u']
 }
 only_lastest = True
 
