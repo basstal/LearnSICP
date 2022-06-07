@@ -4,6 +4,7 @@ from lab02 import *
 
 # Higher Order Functions
 
+
 def compose1(f, g):
     """Return the composition function which given x, computes f(g(x)).
 
@@ -21,6 +22,7 @@ def compose1(f, g):
     """
     return lambda x: f(g(x))
 
+
 def composite_identity(f, g):
     """
     Return a function with one parameter x that returns True if f(g(x)) is
@@ -35,7 +37,8 @@ def composite_identity(f, g):
     >>> b1(4)                            # (4 + 1)^2 != 4^2 + 1
     False
     """
-    "*** YOUR CODE HERE ***"
+    return lambda x: compose1(f, g)(x) == compose1(g, f)(x)
+
 
 def count_cond(condition):
     """Returns a function with one parameter N that counts all the numbers from
@@ -62,7 +65,14 @@ def count_cond(condition):
     >>> count_primes(20)   # 2, 3, 5, 7, 11, 13, 17, 19
     8
     """
-    "*** YOUR CODE HERE ***"
+    def cnt(n):
+        count = 0
+        for i in range(1, n+1):
+            if condition(n, i):
+                count += 1
+        return count
+    return cnt
+
 
 def cycle(f1, f2, f3):
     """Returns a function that is itself a higher-order function.
@@ -90,4 +100,18 @@ def cycle(f1, f2, f3):
     >>> do_two_cycles(1)
     19
     """
-    "*** YOUR CODE HERE ***"
+    def apply(v, n):
+        while n >= 3:
+            n -= 1
+            v = f1(v)
+            n -= 1
+            v = f2(v)
+            n -= 1
+            v = f3(v)
+        if n > 0:
+            n -= 1
+            v = f1(v)
+            if n == 1:
+                v = f2(v)
+        return v
+    return lambda n: lambda v: apply(v, n)

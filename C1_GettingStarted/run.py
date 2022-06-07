@@ -16,7 +16,7 @@ sub_project = {
     'hw02': ['-q product', '-q factorial', '-q make_adder'],
     'lab00': [''],
     'lab01': [''],
-    'lab02': ['-q lambda -u', '-q hof -u']
+    'lab02': ['-q lambda -u', '-q hof -u', '-q lambda_curry2', '-q composite_identity', '-q count_cond', '-q cycle']
 }
 only_lastest = True
 
