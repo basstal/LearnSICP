@@ -14,6 +14,14 @@ sub_project = {
     ],
     'hw01': [''],
     'hw02': ['-q product', '-q factorial', '-q make_adder'],
+    'hw03': ['-q has_seven',
+             '-q summation',
+             '-q accumulate',
+             '-q summation_using_accumulate',
+             '-q product_using_accumulate',
+             '-q filtered_accumulate',
+             '-q make_repeater',
+             '-q church_to_int'],
     'lab00': [''],
     'lab01': [''],
     'lab02': ['-q lambda -u', '-q hof -u', '-q lambda_curry2', '-q composite_identity', '-q count_cond', '-q cycle']
@@ -37,6 +45,7 @@ if __name__ == "__main__":
     questions = sub_project[proj]
     for q in questions:
         if not only_lastest or q == questions[-1]:
+            logger.info(f'current action : {q}')
             e.execute_file('py', ['ok', '--local', q],
                            work_dir=proj_dir,
                            use_direct_stdout=True)
