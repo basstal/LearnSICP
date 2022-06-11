@@ -1,7 +1,7 @@
 from symtable import Function
 
 
-HW_SOURCE_FILE = 'hw03.py'
+HW_SOURCE_FILE = "hw03.py"
 
 #############
 # Questions #
@@ -62,16 +62,20 @@ def identity(x):
     return x
 
 
-def triple(x): return 3 * x
+def triple(x):
+    return 3 * x
 
 
-def increment(x): return x + 1
+def increment(x):
+    return x + 1
 
 
-def add(x, y): return x + y
+def add(x, y):
+    return x + y
 
 
-def mul(x, y): return x * y
+def mul(x, y):
+    return x * y
 
 
 def accumulate(combiner, base, n, term):
@@ -149,10 +153,12 @@ def filtered_accumulate(combiner, base, pred, n, term):
     ...       ['While', 'For', 'Recursion'])
     True
     """
+
     def combine_if(x, y):
         if pred(y):
             return combiner(x, y)
         return x
+
     return accumulate(combine_if, base, n, term)
 
 
@@ -184,9 +190,12 @@ def make_repeater(f, n):
 
 def compose1(f, g):
     """Return a function h, such that h(x) = f(g(x))."""
+
     def h(x):
         return f(g(x))
+
     return h
+
 
 ###################
 # Extra Questions #
@@ -196,7 +205,7 @@ def compose1(f, g):
 quine = """
 lambda: eval("print(quine)")
 """
-quine = eval(quine, {'quine': quine})
+quine = eval(quine, {"quine": quine})
 
 
 def zero(f):
@@ -209,12 +218,12 @@ def successor(n):
 
 def one(f):
     """Church numeral 1: same as successor(zero)"""
-    return lambda f: lambda x: f(zero(f)(x))
+    return lambda x: f(x)
 
 
 def two(f):
     """Church numeral 2: same as successor(successor(zero))"""
-    return 
+    return lambda x: f(f(x))
 
 
 three = successor(two)
@@ -232,12 +241,7 @@ def church_to_int(n):
     >>> church_to_int(three)
     3
     """
-    c = 0
-    n = n(0)
-    while n(0) != 0:
-        n = n(0)
-        c += 1
-    return c
+    return n(lambda x: x + 1)(0)
 
 
 def add_church(m, n):
@@ -246,7 +250,7 @@ def add_church(m, n):
     >>> church_to_int(add_church(two, three))
     5
     """
-    "*** YOUR CODE HERE ***"
+    return lambda f: compose1(n(f), m(f))
 
 
 def mul_church(m, n):
@@ -258,7 +262,7 @@ def mul_church(m, n):
     >>> church_to_int(mul_church(three, four))
     12
     """
-    "*** YOUR CODE HERE ***"
+    return compose1(n, m)
 
 
 def pow_church(m, n):
@@ -269,4 +273,4 @@ def pow_church(m, n):
     >>> church_to_int(pow_church(three, two))
     9
     """
-    "*** YOUR CODE HERE ***"
+    return n(m)

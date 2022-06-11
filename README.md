@@ -1,7 +1,5 @@
 - [LearnSICP](#learnsicp)
   - [Contents](#contents)
-    - [Summary](#summary)
-    - [Exercise](#exercise)
   - [Progress](#progress)
 
 # LearnSICP
@@ -20,10 +18,6 @@ requirements.txt dictate py module that used in run.py.
 
 I use run.py to export the ok program to another folder for integration, through copy ok in executing and ignore the copied file in .gitignore.
 
-### Summary
-
-- [1.1 Getting Started]
-
-### Exercise
-
 ## Progress
+
+Chapter [1/4]
