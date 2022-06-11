@@ -61,7 +61,11 @@ sub_project = {
         '-q call_expressions -u',
         '-q cycle',
         '-q is_palindrome',
-        '-q skip_mul_ok -u'
+        '-q skip_mul_ok -u',
+        '-q skip_mul',
+        '-q is_prime',
+        '-q interleaved_sum',
+        '-q ten_pairs'
     ],
 }
 only_lastest = True
