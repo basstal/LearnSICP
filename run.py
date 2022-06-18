@@ -45,6 +45,12 @@ sub_project = {
         "-q mul_church",
         "-q pow_church",
     ],
+    "hw04":[
+        "-q taxicab",
+        "-q squares",
+        "-q g",
+        "-q g_iter"
+    ],
     "lab00": [""],
     "lab01": [""],
     "lab02": [
