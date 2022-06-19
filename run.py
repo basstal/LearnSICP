@@ -45,11 +45,14 @@ sub_project = {
         "-q mul_church",
         "-q pow_church",
     ],
-    "hw04":[
+    "hw04": [
         "-q taxicab",
         "-q squares",
         "-q g",
-        "-q g_iter"
+        "-q g_iter",
+        "-q pingpong",
+        "-q count_change",
+        "-q make_anonymous_factorial",
     ],
     "lab00": [""],
     "lab01": [""],
@@ -63,15 +66,27 @@ sub_project = {
     ],
     "lab03": [
         "-q gcd",
-        '-q hailstone',
-        '-q call_expressions -u',
-        '-q cycle',
-        '-q is_palindrome',
-        '-q skip_mul_ok -u',
-        '-q skip_mul',
-        '-q is_prime',
-        '-q interleaved_sum',
-        '-q ten_pairs'
+        "-q hailstone",
+        "-q call_expressions -u",
+        "-q cycle",
+        "-q is_palindrome",
+        "-q skip_mul_ok -u",
+        "-q skip_mul",
+        "-q is_prime",
+        "-q interleaved_sum",
+        "-q ten_pairs",
+    ],
+    "lab04": [
+        "-q indexing -u",
+        "-q lists -u",
+        "-q if_this_not_that",
+        "-q distance",
+        "-q closer_city",
+        "-q distance -q closer_city",
+        "-q flatten",
+        "-q merge",
+        "-q create_row",
+        "-q create_board"
     ],
 }
 only_lastest = True

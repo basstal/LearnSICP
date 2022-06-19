@@ -138,7 +138,18 @@ def pingpong(n):
     >>> check(HW_SOURCE_FILE, 'pingpong', ['Assign', 'AugAssign'])
     True
     """
-    "*** YOUR CODE HERE ***"
+
+    def impl(i, val, inc=True):
+        if i <= n:
+            return [val] + impl(
+                i + 1,
+                val + 1 if inc else val - 1,
+                not inc if has_seven(i + 1) or (i + 1) % 7 == 0 else inc,
+            )
+        else:
+            return []
+
+    return impl(1, 1)[n - 1]
 
 
 def has_seven(k):
@@ -177,7 +188,25 @@ def count_change(amount):
     >>> count_change(100)
     9828
     """
-    "*** YOUR CODE HERE ***"
+    rpow = lambda x: rpow(x + 1) if pow(2, x) <= amount else x
+    cents = [pow(2, x) for x in range(0, rpow(1))]
+
+    def take_change_ways(amount, cent):
+        if amount <= 0:
+            return 0
+        if cent == 1:
+            return 1
+        if amount > cent:
+            get_sub_cents = lambda x: [x] + (get_sub_cents(x // 2) if x > 1 else [])
+            # print(get_sub_cents(cent))
+            return sum(
+                [take_change_ways(amount - cent, x) for x in get_sub_cents(cent)]
+            )
+        elif amount == cent:
+            return 1
+        return 0
+
+    return sum([take_change_ways(amount, cent) for cent in cents])
 
 
 ###################
@@ -196,4 +225,6 @@ def make_anonymous_factorial():
     >>> check(HW_SOURCE_FILE, 'make_anonymous_factorial', ['Assign', 'AugAssign', 'FunctionDef', 'Recursion'])
     True
     """
-    return "YOUR_EXPRESSION_HERE"
+    return lambda x: (lambda f: f(x, f))(
+        lambda x, f: mul(x, f(x - 1, f)) if x > 0 else 1
+    )
