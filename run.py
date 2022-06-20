@@ -86,7 +86,9 @@ sub_project = {
         "-q flatten",
         "-q merge",
         "-q create_row",
-        "-q create_board"
+        "-q create_board",
+        "-q replace_elem",
+        "-q get_piece -q put_piece"
     ],
 }
 only_lastest = True

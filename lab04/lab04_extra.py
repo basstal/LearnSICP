@@ -52,6 +52,7 @@ def merge(lst1, lst2):
         r.extend(lst2[i2:])
     return r
 
+
 ######################
 ### Connect N Game ###
 ######################
@@ -64,7 +65,7 @@ def create_row(size):
     >>> create_row(5)
     ['-', '-', '-', '-', '-']
     """
-    return ['-' for _ in range(size)]
+    return ["-" for _ in range(size)]
 
 
 def create_board(rows, columns):
@@ -88,7 +89,7 @@ def replace_elem(lst, index, elem):
     False
     """
     assert index >= 0 and index < len(lst), "Index is out of bounds"
-    "*** YOUR CODE HERE ***"
+    return [lst[i] if i != index else elem for i in range(len(lst))]
 
 
 def get_piece(board, row, column):
@@ -103,7 +104,7 @@ def get_piece(board, row, column):
     >>> get_piece(board, 1, 1)
     '-'
     """
-    "*** YOUR CODE HERE ***"
+    return board[row - 1][column]
 
 
 def put_piece(board, max_rows, column, player):
@@ -126,7 +127,12 @@ def put_piece(board, max_rows, column, player):
     >>> row
     -1
     """
-    "*** YOUR CODE HERE ***"
+    for i in range(max_rows):
+        if board[i][column] == "-":
+            board[i] = replace_elem(board[i], column, player)
+            return (max_rows - i - 1, board)
+    return (-1, board)
+
 
 
 def make_move(board, max_rows, max_cols, col, player):
