@@ -1,8 +1,11 @@
 """ Lab 04 Optional Questions """
 
+import sys
 from lab04 import *
 
 # Q6
+
+
 def flatten(lst):
     """Returns a flattened version of lst.
 
@@ -134,7 +137,6 @@ def put_piece(board, max_rows, column, player):
     return (-1, board)
 
 
-
 def make_move(board, max_rows, max_cols, col, player):
     """Put player's piece in column COL of the board, if it is a valid move.
     Return a tuple of two values:
@@ -160,7 +162,9 @@ def make_move(board, max_rows, max_cols, col, player):
     >>> row
     -1
     """
-    "*** YOUR CODE HERE ***"
+    if col < 0 or col >= max_cols:
+        return (-1, board)
+    return put_piece(board, max_rows, col, player)
 
 
 def print_board(board, max_rows, max_cols):
@@ -176,7 +180,7 @@ def print_board(board, max_rows, max_cols):
     - -
     X -
     """
-    "*** YOUR CODE HERE ***"
+    {print(' '.join([get_piece(board, row, col) for col in range(max_cols)])) for row in range(max_rows)}
 
 
 def check_win_row(board, max_rows, max_cols, num_connect, row, player):
@@ -321,8 +325,6 @@ def check_win_diagonal(board, max_rows, max_cols, num_connect, row, col, player)
 #####################################################################################
 ### You do not need to read or understand the following code for this assignment. ###
 #####################################################################################
-
-import sys
 
 
 def other(player):
