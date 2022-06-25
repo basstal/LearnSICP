@@ -107,7 +107,7 @@ def get_piece(board, row, column):
     >>> get_piece(board, 1, 1)
     '-'
     """
-    return board[row - 1][column]
+    return board[len(board) - row - 1][column]
 
 
 def put_piece(board, max_rows, column, player):
@@ -180,7 +180,10 @@ def print_board(board, max_rows, max_cols):
     - -
     X -
     """
-    {print(' '.join([get_piece(board, row, col) for col in range(max_cols)])) for row in range(max_rows)}
+    {
+        print(" ".join([get_piece(board, row, col) for col in range(max_cols)]))
+        for row in range(max_rows)
+    }
 
 
 def check_win_row(board, max_rows, max_cols, num_connect, row, player):
@@ -205,7 +208,15 @@ def check_win_row(board, max_rows, max_cols, num_connect, row, player):
     >>> check_win_row(board, rows, columns, num_connect, 3, 'O')   # We only detect wins for the given player
     False
     """
-    "*** YOUR CODE HERE ***"
+
+    def count_adjacent(row, col):
+        return (
+            1 + count_adjacent(row, col + 1)
+            if col < max_cols and get_piece(board, row, col) == player
+            else 0
+        )
+
+    return max([count_adjacent(row, col) for col in range(max_cols)]) >= num_connect
 
 
 def check_win_column(board, max_rows, max_cols, num_connect, col, player):
@@ -231,7 +242,15 @@ def check_win_column(board, max_rows, max_cols, num_connect, col, player):
     >>> check_win_column(board, rows, columns, num_connect, 1, 'X')
     False
     """
-    "*** YOUR CODE HERE ***"
+
+    def count_adjacent(row, col):
+        return (
+            1 + count_adjacent(row + 1, col)
+            if row < max_rows and get_piece(board, row, col) == player
+            else 0
+        )
+
+    return max([count_adjacent(row, col) for row in range(max_rows)]) >= num_connect
 
 
 def check_win(board, max_rows, max_cols, num_connect, row, col, player):
@@ -269,7 +288,11 @@ def check_win(board, max_rows, max_cols, num_connect, row, col, player):
     diagonal_win = check_win_diagonal(
         board, max_rows, max_cols, num_connect, row, col, player
     )
-    "*** YOUR CODE HERE ***"
+    return (
+        check_win_row(board, max_rows, max_cols, num_connect, row, player)
+        or check_win_column(board, max_rows, max_cols, num_connect, col, player)
+        or check_win_diagonal(board, max_rows, max_cols, num_connect, row, col, player)
+    )
 
 
 ###############################################################

@@ -90,8 +90,12 @@ sub_project = {
         "-q replace_elem",
         "-q get_piece -q put_piece",
         "-q make_move",
-        "-q print_board"
+        "-q print_board",
+        "-q check_win_row",
+        "-q check_win_column",
+        "-q check_win",
     ],
+    "maps": ["-u"],
 }
 only_lastest = True
 
