@@ -118,6 +118,13 @@ sub_project = {
         "-q 10 -u",
         "-q 10",
     ],
+    "lab05": ["-q dicts -u",
+              "-q map",
+              "-q filter",
+              "-q reduce",
+              "-q acorn_finder",
+              "-q replace_leaf",
+              "-q build_successors_table"],
 }
 only_lastest = True
 
@@ -129,8 +136,7 @@ if __name__ == "__main__":
     current_dir = os.path.dirname(__file__)
     proj_dir = os.path.join(current_dir, proj)
     if not os.path.exists(os.path.join(proj_dir, "ok")):
-        raw_path = "/".join(proj_dir.split(os.path.sep)[:2])
-        ok_exe_pattern = os.path.join(raw_path, "**/ok")
+        ok_exe_pattern = os.path.join(current_dir, "**/ok")
         ok_exe = fs.search(ok_exe_pattern)
         assert ok_exe
         shutil.copyfile(ok_exe, os.path.join(proj_dir, "ok"))
