@@ -19,7 +19,8 @@ def find_closest(location, centroids):
     [2.0, 3.0]
     """
     # BEGIN Question 3
-    "*** YOUR CODE HERE ***"
+    distances = [distance(location, pos0) for pos0 in centroids]
+    return centroids[distances.index(min(distances))]
     # END Question 3
 
 
@@ -48,20 +49,21 @@ def group_by_centroid(restaurants, centroids):
     restaurants closest to the same centroid.
     """
     # BEGIN Question 4
-    "*** YOUR CODE HERE ***"
+    restaurant_to_centroid = [[find_closest(restaurant_location(restaurant), centroids), restaurant] for restaurant in restaurants]
+    return group_by_first(restaurant_to_centroid)
     # END Question 4
 
 
 def find_centroid(cluster):
     """Return the centroid of the locations of the restaurants in cluster."""
     # BEGIN Question 5
-    "*** YOUR CODE HERE ***"
+    return [mean([restaurant_location(restaurant)[0] for restaurant in cluster]), mean([restaurant_location(restaurant)[1] for restaurant in cluster])]
     # END Question 5
 
 
 def k_means(restaurants, k, max_updates=100):
     """Use k-means to group restaurants by location into k clusters."""
-    assert len(restaurants) >= k, 'Not enough restaurants to cluster'
+    assert len(restaurants) >= k, "Not enough restaurants to cluster"
     old_centroids, n = [], 0
     # Select initial centroids randomly by choosing k different restaurants
     centroids = [restaurant_location(r) for r in sample(restaurants, k)]
@@ -69,7 +71,8 @@ def k_means(restaurants, k, max_updates=100):
     while old_centroids != centroids and n < max_updates:
         old_centroids = centroids
         # BEGIN Question 6
-        "*** YOUR CODE HERE ***"
+        clusters = group_by_centroid(restaurants, centroids)
+        centroids = [find_centroid(cluster) for cluster in clusters]
         # END Question 6
         n += 1
     return centroids
@@ -90,14 +93,19 @@ def find_predictor(user, restaurants, feature_fn):
     restaurants -- A sequence of restaurants
     feature_fn -- A function that takes a restaurant and returns a number
     """
-    reviews_by_user = {review_restaurant_name(review): review_rating(review)
-                       for review in user_reviews(user).values()}
+    reviews_by_user = {
+        review_restaurant_name(review): review_rating(review)
+        for review in user_reviews(user).values()
+    }
 
     xs = [feature_fn(r) for r in restaurants]
     ys = [reviews_by_user[restaurant_name(r)] for r in restaurants]
 
     # BEGIN Question 7
-    b, a, r_squared = 0, 0, 0  # REPLACE THIS LINE WITH YOUR SOLUTION
+    sxx = sum([pow(xs[i] - mean(xs), 2) for i in range(len(xs))])
+    syy = sum([pow(ys[i] - mean(ys), 2) for i in range(len(ys))])
+    sxy = sum([(xi - mean(xs)) * (yi - mean(ys)) for xi, yi in zip(xs, ys)])
+    b, a, r_squared = sxy / sxx, mean(ys) - sxy / sxx * mean(xs), pow(sxy, 2) / (sxx * syy)  # REPLACE THIS LINE WITH YOUR SOLUTION
     # END Question 7
 
     def predictor(restaurant):
@@ -117,7 +125,7 @@ def best_predictor(user, restaurants, feature_fns):
     """
     reviewed = user_reviewed_restaurants(user, restaurants)
     # BEGIN Question 8
-    "*** YOUR CODE HERE ***"
+    return max([find_predictor(user, reviewed, feature_fn) for feature_fn in feature_fns], key=lambda p:p[1])[0]
     # END Question 8
 
 
@@ -133,7 +141,7 @@ def rate_all(user, restaurants, feature_fns):
     predictor = best_predictor(user, ALL_RESTAURANTS, feature_fns)
     reviewed = user_reviewed_restaurants(user, restaurants)
     # BEGIN Question 9
-    "*** YOUR CODE HERE ***"
+    return {restaurant_name(restaurant) : user_rating(user, restaurant_name(restaurant)) if restaurant in reviewed else predictor(restaurant) for restaurant in restaurants}
     # END Question 9
 
 
@@ -145,45 +153,63 @@ def search(query, restaurants):
     restaurants -- A sequence of restaurants
     """
     # BEGIN Question 10
-    "*** YOUR CODE HERE ***"
+    return [restaurant for restaurant in restaurants if query in restaurant_categories(restaurant)]
     # END Question 10
 
 
 def feature_set():
     """Return a sequence of feature functions."""
-    return [lambda r: mean(restaurant_ratings(r)),
-            restaurant_price,
-            lambda r: len(restaurant_ratings(r)),
-            lambda r: restaurant_location(r)[0],
-            lambda r: restaurant_location(r)[1]]
+    return [
+        lambda r: mean(restaurant_ratings(r)),
+        restaurant_price,
+        lambda r: len(restaurant_ratings(r)),
+        lambda r: restaurant_location(r)[0],
+        lambda r: restaurant_location(r)[1],
+    ]
 
 
 @main
 def main(*args):
     import argparse
+
     parser = argparse.ArgumentParser(
-        description='Run Recommendations',
-        formatter_class=argparse.RawTextHelpFormatter
+        description="Run Recommendations", formatter_class=argparse.RawTextHelpFormatter
     )
-    parser.add_argument('-u', '--user', type=str, choices=USER_FILES,
-                        default='test_user',
-                        metavar='USER',
-                        help='user file, e.g.\n' +
-                        '{{{}}}'.format(','.join(sample(USER_FILES, 3))))
-    parser.add_argument('-k', '--k', type=int, help='for k-means')
-    parser.add_argument('-q', '--query', choices=CATEGORIES,
-                        metavar='QUERY',
-                        help='search for restaurants by category e.g.\n'
-                        '{{{}}}'.format(','.join(sample(CATEGORIES, 3))))
-    parser.add_argument('-p', '--predict', action='store_true',
-                        help='predict ratings for all restaurants')
-    parser.add_argument('-r', '--restaurants', action='store_true',
-                        help='outputs a list of restaurant names')
+    parser.add_argument(
+        "-u",
+        "--user",
+        type=str,
+        choices=USER_FILES,
+        default="test_user",
+        metavar="USER",
+        help="user file, e.g.\n" + "{{{}}}".format(",".join(sample(USER_FILES, 3))),
+    )
+    parser.add_argument("-k", "--k", type=int, help="for k-means")
+    parser.add_argument(
+        "-q",
+        "--query",
+        choices=CATEGORIES,
+        metavar="QUERY",
+        help="search for restaurants by category e.g.\n"
+        "{{{}}}".format(",".join(sample(CATEGORIES, 3))),
+    )
+    parser.add_argument(
+        "-p",
+        "--predict",
+        action="store_true",
+        help="predict ratings for all restaurants",
+    )
+    parser.add_argument(
+        "-r",
+        "--restaurants",
+        action="store_true",
+        help="outputs a list of restaurant names",
+    )
     args = parser.parse_args()
 
     # Output a list of restaurant names
     if args.restaurants:
-        print('Restaurant names:')
+        print("Restaurant names:")
         for restaurant in sorted(ALL_RESTAURANTS, key=restaurant_name):
             print(repr(restaurant_name(restaurant)))
         exit(0)
@@ -195,8 +221,8 @@ def main(*args):
         restaurants = ALL_RESTAURANTS
 
     # Load a user
-    assert args.user, 'A --user is required to draw a map'
-    user = load_user_file('{}.dat'.format(args.user))
+    assert args.user, "A --user is required to draw a map"
+    user = load_user_file("{}.dat".format(args.user))
 
     # Collect ratings
     if args.predict:

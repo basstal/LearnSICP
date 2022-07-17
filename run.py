@@ -1,4 +1,3 @@
-from concurrent.futures import Executor
 import os
 import shutil
 import sys
@@ -95,7 +94,30 @@ sub_project = {
         "-q check_win_column",
         "-q check_win",
     ],
-    "maps": ["-u"],
+    "maps": [
+        "-q 00 -u",
+        "-q 00",
+        "-q 01 -u",
+        "-q 01",
+        "-q 02 -u",
+        "-q 02",
+        "-q 03 -u",
+        "-q 03",
+        "-q 04 -u",
+        "-q 04",
+        "-q 05 -u",
+        "-q 05",
+        "-q 06 -u",
+        "-q 06",
+        "-q 07 -u",
+        "-q 07",
+        "-q 08 -u",
+        "-q 08",
+        "-q 09 -u",
+        "-q 09",
+        "-q 10 -u",
+        "-q 10",
+    ],
 }
 only_lastest = True
 

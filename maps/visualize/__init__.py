@@ -61,7 +61,7 @@ def check_port():
 
 def start_server():
     server, handler = http.server.HTTPServer, SilentServer
-    httpd = server(('', port), handler)
+    httpd = server(('127.0.0.1', port), handler)
     sa = httpd.socket.getsockname()
     print('Serving HTTP on', sa[0], 'port', sa[1], '...')
     print('Type Ctrl-C to exit.')
