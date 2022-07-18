@@ -21,8 +21,8 @@ def build_successors_table(tokens):
     prev = '.'
     for word in tokens:
         if prev not in table:
-            "*** YOUR CODE HERE ***"
-        "*** YOUR CODE HERE ***"
+            table[prev] = list()
+        table[prev].append(word)
         prev = word
     return table
 
@@ -39,7 +39,8 @@ def construct_sent(word, table):
     import random
     result = ''
     while word not in ['.', '!', '?']:
-        "*** YOUR CODE HERE ***"
+        result += f' {word}'
+        word = random.choice(table[word])
     return result.strip() + word
 
 def shakespeare_tokens(path='shakespeare.txt', url='http://composingprograms.com/shakespeare.txt'):
@@ -53,8 +54,8 @@ def shakespeare_tokens(path='shakespeare.txt', url='http://composingprograms.com
         return shakespeare.read().decode(encoding='ascii').split()
 
 # Uncomment the following two lines
-# tokens = shakespeare_tokens()
-# table = build_successors_table(tokens)
+tokens = shakespeare_tokens()
+table = build_successors_table(tokens)
 
 def random_sent():
     import random
@@ -85,7 +86,9 @@ def prune_leaves(t, vals):
         5
       6
     """
-    "*** YOUR CODE HERE ***"
+    if is_leaf(t) and label(t) in vals:
+      return None
+    return tree(label(t), [prune_leaves(b, vals) for b in branches(t) if prune_leaves(b, vals) is not None])
 
 # Q9
 def sprout_leaves(t, vals):

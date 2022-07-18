@@ -124,7 +124,10 @@ sub_project = {
               "-q reduce",
               "-q acorn_finder",
               "-q replace_leaf",
-              "-q build_successors_table"],
+              "-q build_successors_table",
+              "-q construct_sent",
+              "-q prune_leaves",
+              "-q sprout_leaves"],
 }
 only_lastest = True
 
