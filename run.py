@@ -127,11 +127,21 @@ sub_project = {
               "-q build_successors_table",
               "-q construct_sent",
               "-q prune_leaves",
-              "-q sprout_leaves"],
+              "-q sprout_leaves",
+              "-q add_trees"],
+    "hw05": ["-q replace_leaf",
+             "-q move_stack",
+             "-q total_weight",
+             "-q balanced",
+             "-q Account",
+             "-q FreeChecking"]
 }
 only_lastest = True
 
 if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Please input a specific category.(e.g. hw01)")
+        sys.exit(-1)
     proj = sys.argv[1]
     if proj not in sub_project.keys():
         logger.error(f"{proj} not in {sub_project.keys()}")

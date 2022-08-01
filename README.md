@@ -20,4 +20,4 @@ I use run.py to export the ok program to another folder for integration, through
 
 ## Progress
 
-Chapter [1/4]
+Chapter [2/4]

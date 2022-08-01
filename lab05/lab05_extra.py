@@ -53,6 +53,7 @@ def shakespeare_tokens(path='shakespeare.txt', url='http://composingprograms.com
         shakespeare = urlopen(url)
         return shakespeare.read().decode(encoding='ascii').split()
 
+
 # Uncomment the following two lines
 tokens = shakespeare_tokens()
 table = build_successors_table(tokens)
@@ -87,7 +88,7 @@ def prune_leaves(t, vals):
       6
     """
     if is_leaf(t) and label(t) in vals:
-      return None
+        return None
     return tree(label(t), [prune_leaves(b, vals) for b in branches(t) if prune_leaves(b, vals) is not None])
 
 # Q9
@@ -124,7 +125,10 @@ def sprout_leaves(t, vals):
           1
           2
     """
-    "*** YOUR CODE HERE ***"
+    if is_leaf(t):
+        return tree(label(t), [tree(val) for val in vals])
+    return tree(label(t), [sprout_leaves(branch, vals) for branch in branches(t)])
+
 
 # Q10
 def add_trees(t1, t2):
@@ -162,4 +166,11 @@ def add_trees(t1, t2):
         5
       5
     """
-    "*** YOUR CODE HERE ***"
+    if t1 is None:
+        return t2
+    if t2 is None:
+        return t1
+    sum = label(t1) + label(t2)
+    construct_branches = [add_trees(b1, b2) for b1, b2 in zip(branches(t1), branches(t2))]
+    construct_branches.extend(branches(t2)[len(branches(t1)):] if len(branches(t2)) > len(branches(t1)) else branches(t1)[len(branches(t2)):])
+    return tree(sum, construct_branches)
