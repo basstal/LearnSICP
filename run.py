@@ -134,7 +134,11 @@ sub_project = {
              "-q total_weight",
              "-q balanced",
              "-q Account",
-             "-q FreeChecking"]
+             "-q FreeChecking",
+             "-q make_counter",
+             "-q make_fib",
+             "-q make_withdraw",
+             "-q make_joint"]
 }
 only_lastest = True
 
