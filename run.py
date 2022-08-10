@@ -138,7 +138,25 @@ sub_project = {
              "-q make_counter",
              "-q make_fib",
              "-q make_withdraw",
-             "-q make_joint"]
+             "-q make_joint"
+             "-q interval -u",
+             "-q interval",
+             "-q mul_interval -u",
+             "-q mul_interval",
+             "-q sub_interval -u",
+             "-q sub_interval",
+             "-q div_interval -u",
+             "-q div_interval",
+             "-q check_par",
+             "-q quadratic"],
+    "lab06": ["-q car -u",
+              "-q food_truck -u",
+              "-q me",
+              "-q Player.go_to",
+              "-q vending_machine",
+              "-q Player.talk_to",
+              "-q Player.take",
+              "-q Player.unlock"]
 }
 only_lastest = True
 
