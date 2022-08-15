@@ -156,7 +156,18 @@ sub_project = {
               "-q vending_machine",
               "-q Player.talk_to",
               "-q Player.take",
-              "-q Player.unlock"]
+              "-q Player.unlock"],
+    "ants": ["-q 00 -u",
+             "-q 01 -u",
+             "-q 01",
+             "-q 02 -u",
+             "-q 02",
+             "-q 03 -u",
+             "-q 03",
+             "-q 04 -u",
+             "-q 04",
+             "-q 05 -u",
+             "-q 05"]
 }
 only_lastest = True
 
@@ -181,5 +192,5 @@ if __name__ == "__main__":
         if not only_lastest or q == questions[-1]:
             logger.info(f"current action : {q}")
             e.execute_file(
-                "py", ["ok", "--local", q], work_dir=proj_dir, use_direct_stdout=True
+                sys.executable, ["ok", "--local", q], work_dir=proj_dir, use_direct_stdout=True
             )

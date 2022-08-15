@@ -163,8 +163,12 @@ class Player(object):
                 key = item
         if key is None:
             print(f"{place} can't be unlocked without a key!")
+            return
+        destination_place = self.place.get_neighbor(place)
+        if destination_place.locked:
+            key.use(destination_place)
         else:
-            key.use(place)
+            print(f'{place} is already unlocked!')
 
 
 class Character(object):
@@ -190,7 +194,7 @@ class Thing(object):
 class Key(Thing):
     def use(self, place):
         place.locked = False
-        print(f"{place} is now unlocked!")
+        print(f"{place.name} is now unlocked!")
 
 class Treasure(Thing):
     def __init__(self, name, description, value, weight):

@@ -15,3 +15,5 @@ __pycache__
 *.zip
 ok
 !/ok
+
+.DS_Store
