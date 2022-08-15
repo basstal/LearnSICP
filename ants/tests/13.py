@@ -5,7 +5,7 @@ test = {
     {
       'cases': [
         {
-          'answer': '80f6dfebbb21c78163b8aa9dc8abbe28',
+          'answer': 'ScubaThrower',
           'choices': [
             'ScubaThrower',
             'Ant',
@@ -13,11 +13,11 @@ test = {
             'AntColony'
           ],
           'hidden': False,
-          'locked': True,
+          'locked': False,
           'question': 'What class does QueenAnt inherit from?'
         },
         {
-          'answer': 'ec203a8bd48f4369ee6fc9a03ffdbfcc',
+          'answer': 'The first QueenAnt that is instantiated',
           'choices': [
             'The first QueenAnt that is instantiated',
             'The second QueenAnt that is instantiated',
@@ -25,11 +25,11 @@ test = {
             'All QueenAnt instances are true QueenAnts'
           ],
           'hidden': False,
-          'locked': True,
+          'locked': False,
           'question': 'Which QueenAnt instance is the true QueenAnt?'
         },
         {
-          'answer': '5b60299a3505c6a816e3f5d6d44fa408',
+          'answer': 'Its armor is reduced to 0 upon taking its first action',
           'choices': [
             'Its armor is reduced to 0 upon taking its first action',
             'Nothing, the game ends',
@@ -37,7 +37,7 @@ test = {
             'It doubles the damage of all the ants behind it'
           ],
           'hidden': False,
-          'locked': True,
+          'locked': False,
           'question': r"""
           What happens to any QueenAnt instance that is instantiated after the
           first one?
