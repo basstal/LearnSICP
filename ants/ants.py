@@ -392,7 +392,7 @@ class BodyguardAnt(Ant):
     name = 'Bodyguard'
     food_cost = 4
     # BEGIN Problem 9
-    implemented = False   # Change to True to view in the GUI
+    implemented = True   # Change to True to view in the GUI
     # END Problem 9
     container = True
 
@@ -418,7 +418,7 @@ class TankAnt(BodyguardAnt):
     container = True
     food_cost = 6
     # BEGIN Problem 10
-    implemented = False   # Change to True to view in the GUI
+    implemented = True   # Change to True to view in the GUI
     # END Problem 10
 
     def action(self, colony):
@@ -437,14 +437,16 @@ class QueenAnt(ScubaThrower):  # You should change this line
     food_cost = 7
     name = 'Queen'
     # BEGIN Problem 13
-    implemented = False   # Change to True to view in the GUI
+    implemented = True   # Change to True to view in the GUI
     # END Problem 13
     true_queen = None
+    damage_doubled_ants = []
 
     def __init__(self):
         # BEGIN Problem 13
         if QueenAnt.true_queen is None:
             QueenAnt.true_queen = self
+        ScubaThrower.__init__(self)
         # END Problem 13
 
     def action(self, colony):
@@ -454,14 +456,21 @@ class QueenAnt(ScubaThrower):  # You should change this line
         Impostor queens do only one thing: reduce their own armor to 0.
         """
         # BEGIN Problem 13
+        def double_damage(ant):
+            if ant is None or ant in self.damage_doubled_ants:
+                return
+            self.damage_doubled_ants.append(ant)
+            ant.damage *= 2
         if self is QueenAnt.true_queen:
             exit = self.place.exit
             while exit:
                 if exit.ant is None:
                     exit = exit.exit
                     continue
-                # if not exit.ant.damage_doubled:
-                # exit = exit.exit
+                double_damage(exit.ant)
+                if exit.ant.container:
+                    double_damage(exit.ant.ant)
+                exit = exit.exit
             ScubaThrower.action(self, colony)
         else:
             self.reduce_armor(self.armor)
@@ -472,7 +481,7 @@ class QueenAnt(ScubaThrower):  # You should change this line
         remaining, signal the end of the game.
         """
         # BEGIN Problem 13
-        Ant.reduce_armor(amount)
+        Ant.reduce_armor(self, amount)
         if QueenAnt.true_queen.armor <= 0:
             bees_win()
         # END Problem 13
@@ -497,7 +506,11 @@ def make_slow(action):
     action -- An action method of some Bee
     """
     # BEGIN Problem EC
-    "*** YOUR CODE HERE ***"
+
+    def new_action(colony):
+        if colony.time % 2 == 0:
+            action(colony)
+    return new_action
     # END Problem EC
 
 def make_stun(action):
@@ -506,13 +519,26 @@ def make_stun(action):
     action -- An action method of some Bee
     """
     # BEGIN Problem EC
-    "*** YOUR CODE HERE ***"
+
+    def new_action(colony):
+        pass
+    return new_action
     # END Problem EC
 
 def apply_effect(effect, bee, duration):
     """Apply a status effect to a BEE that lasts for DURATION turns."""
     # BEGIN Problem EC
-    "*** YOUR CODE HERE ***"
+    original_action = bee.action
+    effect_action = effect(bee.action)
+
+    def action_switch(colony):
+        nonlocal duration
+        if duration > 0:
+            effect_action(colony)
+        else:
+            original_action(colony)
+        duration -= 1
+    bee.action = action_switch
     # END Problem EC
 
 
@@ -520,8 +546,9 @@ class SlowThrower(ThrowerAnt):
     """ThrowerAnt that causes Slow on Bees."""
 
     name = 'Slow'
+    food_cost = 4
     # BEGIN Problem EC
-    implemented = False   # Change to True to view in the GUI
+    implemented = True   # Change to True to view in the GUI
     # END Problem EC
 
     def throw_at(self, target):
@@ -533,8 +560,9 @@ class StunThrower(ThrowerAnt):
     """ThrowerAnt that causes Stun on Bees."""
 
     name = 'Stun'
+    food_cost = 6
     # BEGIN Problem EC
-    implemented = False   # Change to True to view in the GUI
+    implemented = True   # Change to True to view in the GUI
     # END Problem EC
 
     def throw_at(self, target):

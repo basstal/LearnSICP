@@ -182,7 +182,10 @@ sub_project = {
              "-q 11",
              "-q 12 -u",
              "-q 12",
-             "-q 13 -u"]
+             "-q 13 -u",
+             "-q 13",
+             "-q EC -u",
+             "-q EC"]
 }
 only_lastest = True
 

@@ -44,7 +44,7 @@ test = {
           """
         },
         {
-          'answer': '7f1e876193ad01466bb1f843c9a17b72',
+          'answer': "Attacks the nearest bee and doubles the damage of all the ants behind her (that haven't already been doubled)",
           'choices': [
             r"""
             Attacks the nearest bee and doubles the damage of all the ants
@@ -64,11 +64,11 @@ test = {
             """
           ],
           'hidden': False,
-          'locked': True,
+          'locked': False,
           'question': 'What does the true QueenAnt do each turn?'
         },
         {
-          'answer': 'a753f5e0cf5cd82c878a589f863e2e48',
+          'answer': 'If a Bee reaches the end of a tunnel or the true QueenAnt dies',
           'choices': [
             'If a Bee reaches the end of a tunnel or the true QueenAnt dies',
             'If there are no ants left in the colony',
@@ -76,7 +76,7 @@ test = {
             'If a Bee attacks the true QueenAnt'
           ],
           'hidden': False,
-          'locked': True,
+          'locked': False,
           'question': 'Under what circumstances do Bees win the game?'
         }
       ],
@@ -89,15 +89,13 @@ test = {
           'code': r"""
           >>> # Testing QueenAnt parameters
           >>> QueenAnt.food_cost
-          7cd035adf49fc93a635b4e8bb2e28bd4
-          # locked
+          7
           >>> queen = QueenAnt()
           >>> queen.armor
-          d89cf7c79d5a479b0f636734143ed5e6
-          # locked
+          1
           """,
           'hidden': False,
-          'locked': True
+          'locked': False
         }
       ],
       'scored': True,
