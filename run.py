@@ -185,7 +185,9 @@ sub_project = {
              "-q 13 -u",
              "-q 13",
              "-q EC -u",
-             "-q EC"]
+             "-q EC"],
+    "hw06": ["-q Fib",
+             "-q VendingMachine"]
 }
 only_lastest = True
 
