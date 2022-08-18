@@ -190,7 +190,9 @@ sub_project = {
              "-q VendingMachine"],
     "lab07": ["-q link -u",
               "-q trees -u",
-              "-q link_to_list"]
+              "-q link_to_list",
+              "-q store_digits",
+              "-q cumulative_sum"]
 }
 only_lastest = True
 

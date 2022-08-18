@@ -15,7 +15,11 @@ def link_to_list(link):
     #     result.append(link.first)
     #     link = link.rest
     # return result
-    return [link.first].extend(link_to_list(link.rest)) if link is not Link.empty else []
+    if link is not Link.empty:
+        result = [link.first]
+        result.extend(link_to_list(link.rest))
+        return result
+    return []
 
 # Q4
 def store_digits(n):
@@ -29,7 +33,14 @@ def store_digits(n):
     >>> store_digits(876)
     Link(8, Link(7, Link(6)))
     """
-    "*** YOUR CODE HERE ***"
+    if n // 10 == 0:
+        return Link(n)
+    result = store_digits(n // 10)
+    link = result
+    while link.rest is not Link.empty:
+        link = link.rest
+    link.rest = Link(n % 10)
+    return result
 
 # Q5
 def cumulative_sum(t):
@@ -41,7 +52,7 @@ def cumulative_sum(t):
     >>> t
     Tree(16, [Tree(8, [Tree(5)]), Tree(7)])
     """
-    "*** YOUR CODE HERE ***"
+    
 
 # Linked List Class
 class Link:
