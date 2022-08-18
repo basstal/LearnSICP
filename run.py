@@ -187,7 +187,10 @@ sub_project = {
              "-q EC -u",
              "-q EC"],
     "hw06": ["-q Fib",
-             "-q VendingMachine"]
+             "-q VendingMachine"],
+    "lab07": ["-q link -u",
+              "-q trees -u",
+              "-q link_to_list"]
 }
 only_lastest = True
 
