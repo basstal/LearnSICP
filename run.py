@@ -208,7 +208,15 @@ sub_project = {
               "-q make_advanced_counter_maker",
               "-q trade",
               "-q make_to_string",
-              "-q tree_map"]
+              "-q tree_map",
+              "-q long_paths",
+              "-q zap -u",
+              "-q boom -u"],
+    "lab09": ["-q wwsd-lists -u",
+              "-q over-or-under -u",
+              "-q over-or-under",
+              "-q filter -u",
+              "-q filter"]
 }
 only_lastest = True
 

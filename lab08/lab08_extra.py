@@ -200,7 +200,7 @@ def tree_map(fn, t):
           128
         256
     """
-    
+    return Tree(fn(t.label), [tree_map(fn, branch) for branch in t.branches])
 
 def long_paths(tree, n):
     """Return a list of all paths in tree with length at least n.
@@ -231,7 +231,28 @@ def long_paths(tree, n):
     >>> long_paths(whole, 4)
     [Link(0, Link(11, Link(12, Link(13, Link(14)))))]
     """
-    "*** YOUR CODE HERE ***"
+    pathes = []
+    result = []
+
+    def walk(tree):
+        if tree.is_leaf():
+            pathes.append(tree)
+            if len(pathes) > n:
+                link = Link.empty
+                for index in range(len(pathes)):
+                    path = pathes[len(pathes) - index - 1]
+                    previous = Link(path.label)
+                    previous.rest = link
+                    link = previous
+                result.append(link)
+            pathes.remove(tree)
+        else:
+            pathes.append(tree)
+            for branch in tree.branches:
+                walk(branch)
+            pathes.remove(tree)
+    walk(tree)
+    return result
 
 # Orders of Growth
 def zap(n):
