@@ -192,7 +192,23 @@ sub_project = {
               "-q trees -u",
               "-q link_to_list",
               "-q store_digits",
-              "-q cumulative_sum"]
+              "-q cumulative_sum",
+              "-q remove_all",
+              "-q deep_map_mut",
+              "-q has_cycle",
+              "-q has_cycle_constant",
+              "-q reverse_other"],
+    "hw07": ["-q digits",
+             "-q MissManners"],
+    "lab08": ["-q deep_len",
+              "-q growth -u",
+              "-q foobar -u",
+              "-q attributes -u",
+              "-q Keyboard",
+              "-q make_advanced_counter_maker",
+              "-q trade",
+              "-q make_to_string",
+              "-q tree_map"]
 }
 only_lastest = True
 

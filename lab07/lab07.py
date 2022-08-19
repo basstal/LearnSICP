@@ -52,7 +52,17 @@ def cumulative_sum(t):
     >>> t
     Tree(16, [Tree(8, [Tree(5)]), Tree(7)])
     """
-    
+    def cumulative(branches):
+        if branches is None:
+            return 0
+        result = 0
+        for branch in branches:
+            result += branch.label
+            result += cumulative(branch.branches)
+        return result
+    t.label += cumulative(t.branches)
+    for branch in t.branches:
+        cumulative_sum(branch)
 
 # Linked List Class
 class Link:
