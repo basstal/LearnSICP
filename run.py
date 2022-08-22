@@ -227,7 +227,11 @@ sub_project = {
               "-q gcd -u",
               "-q gcd",
               "-q no-repeats -u",
-              "-q no-repeats"]
+              "-q no-repeats",
+              "-q substitute -u",
+              "-q substitute",
+              "-q sub-all -u",
+              "-q sub-all"]
 }
 only_lastest = True
 
