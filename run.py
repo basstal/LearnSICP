@@ -216,7 +216,18 @@ sub_project = {
               "-q over-or-under -u",
               "-q over-or-under",
               "-q filter -u",
-              "-q filter"]
+              "-q filter",
+              "-q make-adder -u",
+              "-q make-adder",
+              "-q make-list -u",
+              "-q composed -u",
+              "-q composed",
+              "-q remove -u",
+              "-q remove",
+              "-q gcd -u",
+              "-q gcd",
+              "-q no-repeats -u",
+              "-q no-repeats"]
 }
 only_lastest = True
 

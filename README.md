@@ -21,8 +21,9 @@ I use run.py to export the ok program to another folder for integration, through
 
 ## Progress
 
-Chapter [2/4]
+Chapter [3/4]
 
 ## TODOLIST
 
 - hw05 q15 - q17
+- lab09 q5 linked list picture was broken.
