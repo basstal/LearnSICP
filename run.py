@@ -231,7 +231,17 @@ sub_project = {
               "-q substitute -u",
               "-q substitute",
               "-q sub-all -u",
-              "-q sub-all"]
+              "-q sub-all"],
+    "hw09": ["-q how-many-dots -u",
+             "-q how-many-dots",
+             "-q derive-sum -u",
+             "-q derive-sum",
+             "-q derive-product -u",
+             "-q derive-product",
+             "-q make-exp -u",
+             "-q make-exp",
+             "-q derive-exp -u",
+             "-q derive-exp"]
 }
 only_lastest = True
 
