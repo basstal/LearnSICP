@@ -72,6 +72,7 @@ class Literal(Expr):
 
     The `value` attribute contains the fixed value the `Literal` refers to.
     """
+
     def __init__(self, value):
         Expr.__init__(self, value)
         self.value = value
@@ -89,6 +90,7 @@ class Name(Expr):
     The `string` attribute contains the name of the variable (as a Python
     string).
     """
+
     def __init__(self, string):
         Expr.__init__(self, string)
         self.string = string
@@ -109,7 +111,11 @@ class Name(Expr):
         ...     print('Exception raised!')
         Exception raised!
         """
-        "*** YOUR CODE HERE ***"
+        if self.string in env:
+            return env[self.string]
+        if self.string in global_env:
+            return global_env[self.string]
+        raise NameError(f"Name '{self.string}' is not defined")
 
     def __str__(self):
         return self.string
@@ -127,6 +133,7 @@ class LambdaExpr(Expr):
     where `parameters` is the list ['x', 'y'] and `body` is the expression
     CallExpr('add', [Name('x'), Name('y')]).
     """
+
     def __init__(self, parameters, body):
         Expr.__init__(self, parameters, body)
         self.parameters = parameters
@@ -154,6 +161,7 @@ class CallExpr(Expr):
 
     where `operator` is Name('add') and `operands` are [Literal(3), Literal(4)].
     """
+
     def __init__(self, operator, operands):
         Expr.__init__(self, operator, operands)
         self.operator = operator
@@ -175,7 +183,8 @@ class CallExpr(Expr):
         >>> read('add(mul(3, 4), b)').eval(new_env)
         Number(14)
         """
-        "*** YOUR CODE HERE ***"
+        operator_val = self.operator.eval(env)
+        return operator_val.apply([operand.eval(env) for operand in self.operands])
 
     def __str__(self):
         function = str(self.operator)
@@ -237,6 +246,7 @@ class Number(Value):
 
     The `value` attribute is the Python number that this represents.
     """
+
     def __init__(self, value):
         Value.__init__(self, value)
         self.value = value
@@ -258,6 +268,7 @@ class LambdaFunction(Value):
     The `parent` attribute is an environment, a dictionary with variable names
         (strings) as keys and instances of the class Value as values.
     """
+
     def __init__(self, parameters, body, parent):
         Value.__init__(self, parameters, body, parent)
         self.parameters = parameters
@@ -285,7 +296,10 @@ class LambdaFunction(Value):
         if len(self.parameters) != len(arguments):
             raise TypeError("Cannot match parameters {} to arguments {}".format(
                 comma_separated(self.parameters), comma_separated(arguments)))
-        "*** YOUR CODE HERE ***"
+        env = self.parent.copy()
+        for index in range(len(self.parameters)):
+            env.update({self.parameters[index]: arguments[index]})
+        return self.body.eval(env)
 
     def __str__(self):
         definition = LambdaExpr(self.parameters, self.body)
@@ -298,6 +312,7 @@ class PrimitiveFunction(Value):
     The `operator` attribute is a Python function takes Python numbers and
     returns a Python number.
     """
+
     def __init__(self, operator):
         Value.__init__(self, operator)
         self.operator = operator
@@ -311,6 +326,7 @@ class PrimitiveFunction(Value):
 
     def __str__(self):
         return '<primitive function {}>'.format(self.operator.__name__)
+
 
 # The environment that the REPL evaluates expressions in.
 global_env = {

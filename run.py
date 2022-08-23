@@ -241,7 +241,16 @@ sub_project = {
              "-q make-exp -u",
              "-q make-exp",
              "-q derive-exp -u",
-             "-q derive-exp"]
+             "-q derive-exp",
+             ],
+    "lab10": ["-q prologue_reader -u",
+              "-q prologue_expr -u",
+              "-q Name.eval",
+              "-q CallExpr.eval",
+              "-q LambdaFunction.apply"],
+    "scheme": [
+        
+    ]
 }
 only_lastest = True
 
