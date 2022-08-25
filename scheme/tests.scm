@@ -10,7 +10,50 @@
 ;;; *** Add your own tests here! ***
 ;;; ********************************
 ; BEGIN PROBLEM 0
-'replace-this-line
+
+(+ 1 2)
+; expect 3
+(/ 1 0)
+; expect Error
+(+ 1 2)
+; expect 3
+(* 3 4 (- 5 2) 1)
+; expect 36
+(odd? 31)
+; expect #t
+(eval (define tau 6.28))
+; expect 6.28
+(eval 'tau)
+; expect 6.28
+tau
+; expect 6.28
+(define x 15)
+; expect x
+(define y (* 2 x))
+; expect y
+y
+; expect 30
+(+ y (* y 2) 1)
+; expect 91
+(define x 20)
+; expect x
+x
+; expect 20
+'hello
+; expect hello
+'(1 . 2)
+; expect (1 . 2)
+'(1 (2 three . (4 . 5)))
+; expect (1 (2 three 4 . 5))
+(car '(a b))
+; expect a
+(eval (cons 'car '('(1 2))))
+; expect 1
+(define (square x) (* x x))
+; expect square
+square
+; expect (lambda (x) (* x x))
+
 ; END PROBLEM 0
 
 ;;; These are examples from several sections of "The Structure

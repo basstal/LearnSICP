@@ -1,3 +1,4 @@
+import argparse
 import os
 import shutil
 import sys
@@ -248,17 +249,42 @@ sub_project = {
               "-q Name.eval",
               "-q CallExpr.eval",
               "-q LambdaFunction.apply"],
-    "scheme": [
-        
-    ]
+    "scheme": ["-q 01 -u",
+               "-q 01",
+               "-q 02 -u",
+               "-q 02",
+               "-q eval_apply -u",
+               "-q 03 -u",
+               "-q 03",
+               "-q 04 -u",
+               "-q 04",
+               "-q 05 -u",
+               "-q 05",
+               "-q 06 -u",
+               "-q 06",
+               "-q 07 -u",
+               "-q 07",
+               "-q 08 -u",
+               "-q 08",
+               "-q 09 -u",
+               "-q 09",
+               "-q 10 -u",
+               "-q 10",
+               "-q 11 -u",
+               "-q 11",
+               "-q 12 -u",
+               "-q 12"]
 }
-only_lastest = True
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
+    myargparse = argparse.ArgumentParser()
+    myargparse.add_argument(type=str, help='The sub project name.', dest='proj', default=None)
+    myargparse.add_argument('--all', help='Run all sub project\'s job.', default=False, action='store_true')
+    parsed_args = myargparse.parse_args()
+    proj = parsed_args.proj
+    if proj is None:
         print("Please input a specific category.(e.g. hw01)")
         sys.exit(-1)
-    proj = sys.argv[1]
     if proj not in sub_project.keys():
         logger.error(f"{proj} not in {sub_project.keys()}")
         exit()
@@ -272,7 +298,7 @@ if __name__ == "__main__":
     e = Executor()
     questions = sub_project[proj]
     for q in questions:
-        if not only_lastest or q == questions[-1]:
+        if parsed_args.all or q == questions[-1]:
             logger.info(f"current action : {q}")
             e.execute_file(
                 sys.executable, ["ok", "--local", q], work_dir=proj_dir, use_direct_stdout=True
