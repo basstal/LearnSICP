@@ -284,7 +284,11 @@ sub_project = {
                "-q 16",
                "-q tests.scm",
                "-q 17",
-               "-q 18"]
+               "-q 18"],
+    "hw10": ["-q accumulate",
+             "-q accumulate-tail",
+             "-q list-comp"],
+    "lab11": ["-q iterators -u"]
 }
 
 if __name__ == "__main__":

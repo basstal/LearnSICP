@@ -15,9 +15,15 @@ Video on https://www.bilibili.com/video/BV16W411W76H
 
 ## Contents
 
-requirements.txt dictate py module that used in run.py.
+Requirements.txt dictate py module that used in run.py.
 
 I use run.py to export the ok program to another folder for integration, through copy ok in executing and ignore the copied file in .gitignore.
+
+For example, run all problems in lab01 as follow.
+
+```cmd
+python3 -m run lab01 --all
+```
 
 ## Progress
 
@@ -27,3 +33,5 @@ Chapter [3/4]
 
 - hw05 q15 - q17
 - lab09 q5 linked list picture was broken.
+- scheme q19 - q21
+- hw10 q3
