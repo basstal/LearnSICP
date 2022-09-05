@@ -288,7 +288,15 @@ sub_project = {
     "hw10": ["-q accumulate",
              "-q accumulate-tail",
              "-q list-comp"],
-    "lab11": ["-q iterators -u"]
+    "lab11": ["-q iterators -u",
+              "-q generators -u",
+              "-q scale",
+              "-q trap",
+              "-q hailstone",
+              "-q repeated",
+              "-q merge",
+              "-q remainders_generator",
+              "-q zip_generator"]
 }
 
 if __name__ == "__main__":

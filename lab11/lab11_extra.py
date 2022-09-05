@@ -1,5 +1,8 @@
 """ Optional Questions for Lab 11 """
 
+from functools import cache
+
+from pkg_resources import yield_lines
 from lab11 import *
 
 # Q5
@@ -16,7 +19,15 @@ def hailstone(n):
     2
     1
     """
-    "*** YOUR CODE HERE ***"
+    while True:
+        yield n
+        if n == 1:
+            break
+        elif n % 2 == 0:
+            n //= 2
+        else:
+            n *= 3
+            n += 1
 
 # Q6
 def repeated(t, k):
@@ -31,7 +42,16 @@ def repeated(t, k):
     None
     """
     assert k > 1
-    "*** YOUR CODE HERE ***"
+    t_iter = iter(t)
+    last_repeated = next(t_iter)
+    repeated_times = 1
+    while True:
+        repeated = next(t_iter)
+        if last_repeated == repeated:
+            repeated_times += 1
+        last_repeated = repeated
+        if repeated_times == k:
+            return last_repeated
 
 # Q7
 def merge(s0, s1):
@@ -53,7 +73,23 @@ def merge(s0, s1):
     """
     i0, i1 = iter(s0), iter(s1)
     e0, e1 = next(i0, None), next(i1, None)
-    "*** YOUR CODE HERE ***"
+    while e0 is not None and e1 is not None:
+        if e0 < e1:
+            yield e0
+            e0 = next(i0, None)
+        elif e0 > e1:
+            yield e1
+            e1 = next(i1, None)
+        else:
+            yield e0
+            e0, e1 = next(i0, None), next(i1, None)
+    while e0 is not None:
+        yield e0
+        e0 = next(i0, None)
+    while e1 is not None:
+        yield e1
+        e1 = next(i1, None)
+
 
 # Q8
 def remainders_generator(m):
@@ -78,7 +114,13 @@ def remainders_generator(m):
     7
     11
     """
-    "*** YOUR CODE HERE ***"
+    def generator(start):
+        t = 0
+        while True:
+            yield start + m * t
+            t += 1
+    for i in range(m):
+        yield iter(generator(i))
 
 # Q9
 def zip_generator(*iterables):
@@ -93,4 +135,14 @@ def zip_generator(*iterables):
     [1, 4, 7]
     [2, 5, 8]
     """
-    "*** YOUR CODE HERE ***"
+    items = []
+    for item in iterables:
+        items.append(iter(item))
+    while True:
+        try:
+            gather = []
+            for item in items:
+                gather.append(next(item))
+            yield gather
+        except StopIteration:
+            break

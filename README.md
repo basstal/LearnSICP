@@ -27,7 +27,7 @@ python3 -m run lab01 --all
 
 ## Progress
 
-Chapter [3/4]
+Chapter [4/4]
 
 ## TODOLIST
 
@@ -35,3 +35,4 @@ Chapter [3/4]
 - lab09 q5 linked list picture was broken.
 - scheme q19 - q21
 - hw10 q3
+- hw11 and laters
