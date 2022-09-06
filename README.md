@@ -5,7 +5,7 @@
 
 # LearnSICP
 
-This repository contains exercise and summary in learning CS61A Spring 2018.
+This repository contains exercises for learning CS61A Spring 2018.
 
 Textbook on http://www.composingprograms.com/
 
@@ -15,7 +15,7 @@ Video on https://www.bilibili.com/video/BV16W411W76H
 
 ## Contents
 
-Requirements.txt dictate py module that used in run.py.
+Requirements.txt dictate the py module that is used in run.py.
 
 I use run.py to export the ok program to another folder for integration, through copy ok in executing and ignore the copied file in .gitignore.
 

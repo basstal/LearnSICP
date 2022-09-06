@@ -7,7 +7,7 @@
 
 # LearnSICP
 
-This repository contains exercise and summary on reading Structure and Interpretation of Computer Programs(SICP)(second edition).
+This repository contains exercises and a summary of reading Structure and Interpretation of Computer Programs(SICP)(second edition).
 
 ## Contents
 
@@ -23,7 +23,7 @@ This repository contains exercise and summary on reading Structure and Interpret
 
 ## Notes
 
-- python as exercise programming language.
+- python as the exercise programming language.
 
 ## Progress
 
